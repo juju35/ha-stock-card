@@ -74,6 +74,11 @@ const STRINGS = {
     portfolio_section: "Portfolio (optional)",
     quantity: "quantity",
     purchase_price: "purchase price",
+    currency: "Currency of the portfolio total",
+    currency_helper: "Converts the total, its day change and the gain. Rates come from a Yahoo Finance currency pair (EURUSD=X) when there is one, else from the sensors below; a currency with no rate keeps its own total",
+    currency_none: "Each currency apart (no conversion)",
+    rate: "{from} → {to} rate (optional)",
+    no_rate: "no rate to {to}",
     language: "Language",
     lang_auto: "Automatic",
   },
@@ -125,6 +130,11 @@ const STRINGS = {
     portfolio_section: "Portefeuille (facultatif)",
     quantity: "quantité",
     purchase_price: "prix d'achat",
+    currency: "Devise du total du portefeuille",
+    currency_helper: "Convertit le total, sa variation du jour et la plus-value. Les taux viennent d'une paire de devises Yahoo Finance (EURUSD=X) s'il y en a une, sinon des capteurs ci-dessous ; une devise sans taux garde son propre total",
+    currency_none: "Chaque devise à part (sans conversion)",
+    rate: "Taux {from} → {to} (facultatif)",
+    no_rate: "pas de taux vers {to}",
     language: "Langue",
     lang_auto: "Automatique",
   },
@@ -176,6 +186,11 @@ const STRINGS = {
     portfolio_section: "Depot (optional)",
     quantity: "Stückzahl",
     purchase_price: "Kaufpreis",
+    currency: "Währung der Depotsumme",
+    currency_helper: "Rechnet die Summe, ihre Tagesveränderung und den Gewinn um. Die Kurse kommen aus einem Yahoo-Finance-Währungspaar (EURUSD=X), falls vorhanden, sonst aus den Sensoren unten; eine Währung ohne Kurs behält ihre eigene Summe",
+    currency_none: "Jede Währung getrennt (keine Umrechnung)",
+    rate: "Kurs {from} → {to} (optional)",
+    no_rate: "kein Kurs nach {to}",
     language: "Sprache",
     lang_auto: "Automatisch",
   },
@@ -227,6 +242,11 @@ const STRINGS = {
     portfolio_section: "Cartera (opcional)",
     quantity: "cantidad",
     purchase_price: "precio de compra",
+    currency: "Divisa del total de la cartera",
+    currency_helper: "Convierte el total, su variación del día y la plusvalía. Los tipos vienen de un par de divisas de Yahoo Finance (EURUSD=X) si lo hay, si no de los sensores de abajo; una divisa sin tipo conserva su propio total",
+    currency_none: "Cada divisa por separado (sin conversión)",
+    rate: "Tipo {from} → {to} (opcional)",
+    no_rate: "sin tipo a {to}",
     language: "Idioma",
     lang_auto: "Automático",
   },
@@ -279,6 +299,11 @@ const STRINGS = {
     portfolio_section: "Портфолио (опционо)",
     quantity: "количина",
     purchase_price: "набавна цена",
+    currency: "Валута укупног портфолија",
+    currency_helper: "Претвара укупан износ, његову дневну промену и добит. Курсеви долазе из валутног пара Yahoo Finance (EURUSD=X) ако постоји, иначе из сензора испод; валута без курса задржава свој износ",
+    currency_none: "Свака валута посебно (без конверзије)",
+    rate: "Курс {from} → {to} (опционо)",
+    no_rate: "нема курса за {to}",
     language: "Језик",
     lang_auto: "Аутоматски",
   },
@@ -331,6 +356,11 @@ const STRINGS = {
     portfolio_section: "Portfolio (opciono)",
     quantity: "količina",
     purchase_price: "nabavna cena",
+    currency: "Valuta ukupnog portfolija",
+    currency_helper: "Pretvara ukupan iznos, njegovu dnevnu promenu i dobit. Kursevi dolaze iz valutnog para Yahoo Finance (EURUSD=X) ako postoji, inače iz senzora ispod; valuta bez kursa zadržava svoj iznos",
+    currency_none: "Svaka valuta posebno (bez konverzije)",
+    rate: "Kurs {from} → {to} (opciono)",
+    no_rate: "nema kursa za {to}",
     language: "Jezik",
     lang_auto: "Automatski",
   },
@@ -382,6 +412,11 @@ const STRINGS = {
     portfolio_section: "Portafoglio (facoltativo)",
     quantity: "quantità",
     purchase_price: "prezzo di acquisto",
+    currency: "Valuta del totale del portafoglio",
+    currency_helper: "Converte il totale, la sua variazione del giorno e la plusvalenza. I tassi vengono da una coppia di valute Yahoo Finance (EURUSD=X) se c'è, altrimenti dai sensori qui sotto; una valuta senza tasso mantiene il proprio totale",
+    currency_none: "Ogni valuta a parte (senza conversione)",
+    rate: "Tasso {from} → {to} (facoltativo)",
+    no_rate: "nessun tasso verso {to}",
     language: "Lingua",
     lang_auto: "Automatica",
   },
@@ -433,6 +468,11 @@ const STRINGS = {
     portfolio_section: "Portefeuille (optioneel)",
     quantity: "aantal",
     purchase_price: "aankoopprijs",
+    currency: "Valuta van het portefeuilletotaal",
+    currency_helper: "Rekent het totaal, de dagverandering en de winst om. De koersen komen uit een Yahoo Finance-valutapaar (EURUSD=X) als dat er is, anders uit de sensoren hieronder; een valuta zonder koers houdt haar eigen totaal",
+    currency_none: "Elke valuta apart (geen omrekening)",
+    rate: "Koers {from} → {to} (optioneel)",
+    no_rate: "geen koers naar {to}",
     language: "Taal",
     lang_auto: "Automatisch",
   },
@@ -484,6 +524,11 @@ const STRINGS = {
     portfolio_section: "Carteira (opcional)",
     quantity: "quantidade",
     purchase_price: "preço de compra",
+    currency: "Moeda do total da carteira",
+    currency_helper: "Converte o total, a sua variação do dia e a mais-valia. As taxas vêm de um par de moedas do Yahoo Finance (EURUSD=X) se existir, senão dos sensores abaixo; uma moeda sem taxa mantém o seu próprio total",
+    currency_none: "Cada moeda à parte (sem conversão)",
+    rate: "Taxa {from} → {to} (opcional)",
+    no_rate: "sem taxa para {to}",
     language: "Idioma",
     lang_auto: "Automático",
   },
@@ -537,6 +582,11 @@ const STRINGS = {
     portfolio_section: "Portfel (opcjonalnie)",
     quantity: "liczba",
     purchase_price: "cena zakupu",
+    currency: "Waluta sumy portfela",
+    currency_helper: "Przelicza sumę, jej dzienną zmianę i zysk. Kursy pochodzą z pary walutowej Yahoo Finance (EURUSD=X), jeśli istnieje, w przeciwnym razie z czujników poniżej; waluta bez kursu zachowuje własną sumę",
+    currency_none: "Każda waluta osobno (bez przeliczania)",
+    rate: "Kurs {from} → {to} (opcjonalnie)",
+    no_rate: "brak kursu do {to}",
     language: "Język",
     lang_auto: "Automatycznie",
   },
@@ -589,6 +639,11 @@ const STRINGS = {
     portfolio_section: "Portofoliu (opțional)",
     quantity: "cantitate",
     purchase_price: "preț de achiziție",
+    currency: "Moneda totalului portofoliului",
+    currency_helper: "Convertește totalul, variația sa zilnică și câștigul. Cursurile vin dintr-o pereche valutară Yahoo Finance (EURUSD=X) dacă există, altfel din senzorii de mai jos; o monedă fără curs își păstrează propriul total",
+    currency_none: "Fiecare monedă separat (fără conversie)",
+    rate: "Curs {from} → {to} (opțional)",
+    no_rate: "niciun curs către {to}",
     language: "Limbă",
     lang_auto: "Automat",
   },
@@ -640,6 +695,11 @@ const STRINGS = {
     portfolio_section: "Portefølje (valgfri)",
     quantity: "antal",
     purchase_price: "købspris",
+    currency: "Valuta for porteføljens total",
+    currency_helper: "Omregner totalen, dens daglige ændring og gevinsten. Kurserne kommer fra et Yahoo Finance-valutapar (EURUSD=X), hvis der er et, ellers fra sensorerne nedenfor; en valuta uden kurs beholder sin egen total",
+    currency_none: "Hver valuta for sig (ingen omregning)",
+    rate: "Kurs {from} → {to} (valgfri)",
+    no_rate: "ingen kurs til {to}",
     language: "Sprog",
     lang_auto: "Automatisk",
   },
@@ -691,6 +751,11 @@ const STRINGS = {
     portfolio_section: "Portfölj (valfri)",
     quantity: "antal",
     purchase_price: "inköpspris",
+    currency: "Valuta för portföljens totalvärde",
+    currency_helper: "Räknar om totalvärdet, dagens förändring och vinsten. Kurserna kommer från ett valutapar i Yahoo Finance (EURUSD=X) om det finns, annars från sensorerna nedan; en valuta utan kurs behåller sitt eget totalvärde",
+    currency_none: "Varje valuta för sig (ingen omräkning)",
+    rate: "Kurs {from} → {to} (valfri)",
+    no_rate: "ingen kurs till {to}",
     language: "Språk",
     lang_auto: "Automatiskt",
   },
@@ -742,6 +807,11 @@ const STRINGS = {
     portfolio_section: "Портфейл (по избор)",
     quantity: "количество",
     purchase_price: "покупна цена",
+    currency: "Валута на общата стойност на портфейла",
+    currency_helper: "Преизчислява общата стойност, дневната ѝ промяна и печалбата. Курсовете идват от валутна двойка в Yahoo Finance (EURUSD=X), ако има такава, иначе от сензорите по-долу; валута без курс запазва собствената си обща стойност",
+    currency_none: "Всяка валута поотделно (без преизчисляване)",
+    rate: "Курс {from} → {to} (по избор)",
+    no_rate: "няма курс към {to}",
     language: "Език",
     lang_auto: "Автоматично",
   },
@@ -795,6 +865,11 @@ const STRINGS = {
     portfolio_section: "Портфель (необязательно)",
     quantity: "количество",
     purchase_price: "цена покупки",
+    currency: "Валюта итога портфеля",
+    currency_helper: "Пересчитывает итог, его дневное изменение и прибыль. Курсы берутся из валютной пары Yahoo Finance (EURUSD=X), если она есть, иначе из датчиков ниже; валюта без курса сохраняет собственный итог",
+    currency_none: "Каждая валюта отдельно (без пересчёта)",
+    rate: "Курс {from} → {to} (необязательно)",
+    no_rate: "нет курса к {to}",
     language: "Язык",
     lang_auto: "Автоматически",
   },
@@ -848,6 +923,11 @@ const STRINGS = {
     portfolio_section: "Портфель (необов'язково)",
     quantity: "кількість",
     purchase_price: "ціна купівлі",
+    currency: "Валюта підсумку портфеля",
+    currency_helper: "Перераховує підсумок, його денну зміну та прибуток. Курси беруться з валютної пари Yahoo Finance (EURUSD=X), якщо вона є, інакше з датчиків нижче; валюта без курсу зберігає власний підсумок",
+    currency_none: "Кожна валюта окремо (без перерахунку)",
+    rate: "Курс {from} → {to} (необов'язково)",
+    no_rate: "немає курсу до {to}",
     language: "Мова",
     lang_auto: "Автоматично",
   },
@@ -899,6 +979,11 @@ const STRINGS = {
     portfolio_section: "Portfólió (nem kötelező)",
     quantity: "mennyiség",
     purchase_price: "vételár",
+    currency: "A portfólió összesítőjének pénzneme",
+    currency_helper: "Átváltja az összesítőt, a napi változását és a nyereséget. Az árfolyamok egy Yahoo Finance devizapárból (EURUSD=X) jönnek, ha van ilyen, különben az alábbi érzékelőkből; az árfolyam nélküli pénznem megtartja a saját összesítőjét",
+    currency_none: "Minden pénznem külön (átváltás nélkül)",
+    rate: "{from} → {to} árfolyam (opcionális)",
+    no_rate: "nincs árfolyam erre: {to}",
     language: "Nyelv",
     lang_auto: "Automatikus",
   },
@@ -951,6 +1036,11 @@ const STRINGS = {
     portfolio_section: "Portfólio (voliteľné)",
     quantity: "počet",
     purchase_price: "nákupná cena",
+    currency: "Mena súčtu portfólia",
+    currency_helper: "Prepočíta súčet, jeho dennú zmenu a zisk. Kurzy pochádzajú z menového páru Yahoo Finance (EURUSD=X), ak existuje, inak zo snímačov nižšie; mena bez kurzu si ponechá vlastný súčet",
+    currency_none: "Každá mena zvlášť (bez prepočtu)",
+    rate: "Kurz {from} → {to} (voliteľné)",
+    no_rate: "žiadny kurz na {to}",
     language: "Jazyk",
     lang_auto: "Automaticky",
   },
@@ -1003,6 +1093,11 @@ const STRINGS = {
     portfolio_section: "Portfolio (volitelné)",
     quantity: "počet",
     purchase_price: "nákupní cena",
+    currency: "Měna součtu portfolia",
+    currency_helper: "Přepočítá součet, jeho denní změnu a zisk. Kurzy pocházejí z měnového páru Yahoo Finance (EURUSD=X), pokud existuje, jinak ze senzorů níže; měna bez kurzu si ponechá vlastní součet",
+    currency_none: "Každá měna zvlášť (bez přepočtu)",
+    rate: "Kurz {from} → {to} (volitelné)",
+    no_rate: "žádný kurz na {to}",
     language: "Jazyk",
     lang_auto: "Automaticky",
   },
@@ -1056,6 +1151,11 @@ const STRINGS = {
     portfolio_section: "Portfelj (neobvezno)",
     quantity: "količina",
     purchase_price: "nakupna cena",
+    currency: "Valuta skupne vrednosti portfelja",
+    currency_helper: "Preračuna skupno vrednost, njeno dnevno spremembo in dobiček. Tečaji prihajajo iz valutnega para Yahoo Finance (EURUSD=X), če obstaja, sicer iz spodnjih senzorjev; valuta brez tečaja ohrani svojo skupno vrednost",
+    currency_none: "Vsaka valuta posebej (brez preračuna)",
+    rate: "Tečaj {from} → {to} (neobvezno)",
+    no_rate: "ni tečaja v {to}",
     language: "Jezik",
     lang_auto: "Samodejno",
   },
@@ -1108,6 +1208,11 @@ const STRINGS = {
     portfolio_section: "Portfelis (neobligāts)",
     quantity: "daudzums",
     purchase_price: "iegādes cena",
+    currency: "Portfeļa kopsummas valūta",
+    currency_helper: "Pārrēķina kopsummu, tās dienas izmaiņas un peļņu. Kursi tiek ņemti no Yahoo Finance valūtu pāra (EURUSD=X), ja tāds ir, citādi no zemāk norādītajiem sensoriem; valūta bez kursa saglabā savu kopsummu",
+    currency_none: "Katra valūta atsevišķi (bez pārrēķina)",
+    rate: "Kurss {from} → {to} (neobligāts)",
+    no_rate: "nav kursa uz {to}",
     language: "Valoda",
     lang_auto: "Automātiski",
   },
@@ -1159,6 +1264,11 @@ const STRINGS = {
     portfolio_section: "Χαρτοφυλάκιο (προαιρετικό)",
     quantity: "ποσότητα",
     purchase_price: "τιμή αγοράς",
+    currency: "Νόμισμα του συνόλου του χαρτοφυλακίου",
+    currency_helper: "Μετατρέπει το σύνολο, τη μεταβολή της ημέρας και το κέρδος. Οι ισοτιμίες προέρχονται από ένα ζεύγος νομισμάτων του Yahoo Finance (EURUSD=X), αν υπάρχει, αλλιώς από τους αισθητήρες παρακάτω· ένα νόμισμα χωρίς ισοτιμία διατηρεί το δικό του σύνολο",
+    currency_none: "Κάθε νόμισμα χωριστά (χωρίς μετατροπή)",
+    rate: "Ισοτιμία {from} → {to} (προαιρετικό)",
+    no_rate: "καμία ισοτιμία προς {to}",
     language: "Γλώσσα",
     lang_auto: "Αυτόματη",
   },
@@ -1410,26 +1520,114 @@ const quoteOf = (hass, c, hist) => {
   };
 };
 
-// Portfolio totals, one per currency (no conversion): value, change of the day, gain against the purchase prices.
-// Only quotes with a quantity count; the day change only adds the ones that know it.
-const totals = (quotes) => {
+// ---------------------------------------------------------------------------
+// Currency conversion of the portfolio total
+// ---------------------------------------------------------------------------
+
+// Minor units some exchanges quote in (London in pence, Johannesburg in cents, Tel Aviv in agorot): [currency, factor].
+const MINOR_UNITS = { GBp: ["GBP", 0.01], GBX: ["GBP", 0.01], ZAc: ["ZAR", 0.01], ZAC: ["ZAR", 0.01], ILA: ["ILS", 0.01] };
+const majorUnit = (unit) => MINOR_UNITS[unit] ?? [unit, 1];
+
+// The currency the totals are shown in (`currency`), upper case, or null when the totals stay per currency.
+const targetCurrency = (config) => {
+  const c = String(config?.currency ?? "")
+    .trim()
+    .toUpperCase();
+  return isIso(c) ? c : null;
+};
+
+// A Yahoo Finance currency pair: EURUSD=X is the price of 1 EUR in USD.
+const PAIR = /^([A-Z]{3})([A-Z]{3})=X$/;
+const pairOf = (symbol) => {
+  const m = PAIR.exec(String(symbol || "").toUpperCase());
+  return m ? [m[1], m[2]] : null;
+};
+
+// Factor turning an amount in `from` into `to` (1 from = factor to), from the pair [base, quote] of a rate `v`
+// (1 base = v quote); null if the pair is not this one or the rate is not a positive number.
+const pairFactor = (pair, v, from, to) => {
+  if (!Number.isFinite(v) || v <= 0) return null;
+  if (pair[0] === from && pair[1] === to) return v;
+  if (pair[0] === to && pair[1] === from) return 1 / v;
+  return null;
+};
+
+// Rate of `from` into `to`, with the entity it comes from (null for a number): the `exchange_rates` option first,
+// then the Yahoo Finance currency pairs of Home Assistant (EURUSD=X or USDEUR=X). An `exchange_rates` key is a
+// currency (`USD: 0.92`: 1 USD = 0.92 of the card's currency) or a pair (`EURUSD: 1.085`: 1 EUR = 1.085 USD); its
+// value a number or a sensor, whose own Yahoo Finance pair (EURUSD=X), when it has one, decides the direction.
+const rateOf = (hass, config, from, to) => {
+  if (from === to) return { factor: 1, entity: null };
+  const rates = config?.exchange_rates && typeof config.exchange_rates === "object" ? config.exchange_rates : {};
+  for (const [key, val] of Object.entries(rates)) {
+    const k = String(key).toUpperCase();
+    const pair = k.length === 3 ? [k, to] : k.length === 6 ? [k.slice(0, 3), k.slice(3)] : null;
+    if (!pair) continue;
+    let v = typeof val === "number" ? val : null;
+    let entity = null;
+    let own = null;
+    if (typeof val === "string" && hass?.states?.[val]) {
+      entity = val;
+      v = num(hass.states[val].state);
+      own = pairOf(hass.states[val].attributes?.symbol);
+    }
+    const factor = pairFactor(own || pair, v, from, to);
+    if (factor !== null) return { factor, entity };
+  }
+  for (const id of yahooEntities(hass || {})) {
+    const pair = pairOf(hass.states[id].attributes?.symbol);
+    const factor = pair && pairFactor(pair, num(hass.states[id].state), from, to);
+    if (factor) return { factor, entity: id };
+  }
+  return null;
+};
+
+// The entities whose state the conversion reads: the sensors of `exchange_rates`, and every Yahoo Finance
+// currency pair (looked up when no rate is given).
+const rateEntities = (hass, config) => {
+  if (!targetCurrency(config)) return [];
+  const own = Object.values(config.exchange_rates && typeof config.exchange_rates === "object" ? config.exchange_rates : {}).filter((v) => typeof v === "string");
+  return [...own, ...yahooEntities(hass).filter((id) => pairOf(hass.states[id].attributes?.symbol))];
+};
+
+// Portfolio totals: value, change of the day, gain against the purchase prices. One per currency, or, with a
+// `currency` set, one in that currency for every quote whose currency has a rate (converted at the current rate:
+// the move of the rate itself is not in the day change nor in the gain), and one per currency left without a rate
+// (`noRate`). Only quotes with a quantity count; the day change only adds the ones that know it.
+const totals = (quotes, { hass, config } = {}) => {
+  const to = targetCurrency(config);
   const by = new Map();
   for (const q of quotes) {
     if (q.value === null) continue;
-    const tot = by.get(q.unit) ?? { unit: q.unit, value: 0, change: 0, hasChange: false, cost: 0, costValue: 0, hasCost: false };
-    tot.value += q.value;
+    let unit = q.unit;
+    let f = 1;
+    let rate = null;
+    if (to) {
+      const [major, minor] = majorUnit(q.unit);
+      const r = isIso(major) ? rateOf(hass, config, major, to) : null;
+      if (r) {
+        unit = to;
+        f = minor * r.factor;
+        if (major !== to) rate = { from: major, factor: r.factor, entity: r.entity };
+      }
+    }
+    const tot = by.get(unit) ?? { unit, value: 0, change: 0, hasChange: false, cost: 0, costValue: 0, hasCost: false, rates: new Map() };
+    tot.value += f * q.value;
     if (q.change !== null && !q.periodic) {
-      tot.change += q.qty * q.change;
+      tot.change += f * q.qty * q.change;
       tot.hasChange = true;
     }
     if (q.cost !== null) {
-      tot.cost += q.qty * q.cost;
-      tot.costValue += q.value;
+      tot.cost += f * q.qty * q.cost;
+      tot.costValue += f * q.value;
       tot.hasCost = true;
     }
-    by.set(q.unit, tot);
+    if (rate) tot.rates.set(rate.from, rate);
+    by.set(unit, tot);
   }
-  return [...by.values()].map((tot) => {
+  // The converted total first, then the currencies left as they are.
+  const list = [...by.values()].sort((a, b) => Number(b.unit === to) - Number(a.unit === to));
+  return list.map((tot) => {
     const before = tot.value - tot.change;
     return {
       unit: tot.unit,
@@ -1438,6 +1636,8 @@ const totals = (quotes) => {
       pct: tot.hasChange && before ? (100 * tot.change) / before : null,
       gain: tot.hasCost ? tot.costValue - tot.cost : null,
       gainPct: tot.hasCost && tot.cost ? (100 * (tot.costValue - tot.cost)) / tot.cost : null,
+      rates: [...tot.rates.values()],
+      noRate: !!to && tot.unit !== to,
     };
   });
 };
@@ -1586,6 +1786,8 @@ const FULL_STYLE = `
            background: var(--secondary-background-color, rgba(127,127,127,.08)); }
   .total .k { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--secondary-text-color); }
   .total .k .icon { width: 16px; height: 16px; }
+  .total .rate { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+  .total.norate .rate { color: var(--st-warn); }
   .total .v { font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .total .d { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; }
   .total .d .muted { font-size: 12px; }
@@ -1621,6 +1823,7 @@ const FULL_STYLE = `
 const MINI_STYLE = `
   .content { padding: 0 12px 12px; display: flex; flex-direction: column; gap: 6px; }
   .mtotal { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; font-size: 13px; }
+  .mtotal .lbl { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mtotal b { font-size: 16px; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .metric { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(62px, auto); align-items: center; gap: 8px;
             font-size: 13px; padding: 3px 6px; margin: 0 -6px; border-radius: 6px; overflow: hidden; }
@@ -1690,6 +1893,8 @@ class StockCard extends HTMLElement {
   setConfig(config) {
     if (!config) throw new Error("Invalid configuration");
     if (config.entities !== undefined && !Array.isArray(config.entities)) throw new Error("entities must be a list");
+    if (config.exchange_rates !== undefined && (typeof config.exchange_rates !== "object" || Array.isArray(config.exchange_rates)))
+      throw new Error("exchange_rates must be a mapping of currencies to rates");
     this._config = config;
     this.toggleAttribute?.("hide-title", config.show_title === false);
     this.toggleAttribute?.("hide-subtitle", config.show_subtitle === false);
@@ -1720,6 +1925,8 @@ class StockCard extends HTMLElement {
     const h = this._hass;
     const sig = [h.entities, h.language, h.locale?.language];
     for (const c of quoteConfigs(h, this._config)) sig.push(h.states[c.entity]);
+    // The exchange rates of a total converted to `currency`.
+    for (const id of rateEntities(h, this._config)) sig.push(h.states[id]);
     return sig;
   }
 
@@ -1893,13 +2100,35 @@ class StockCard extends HTMLElement {
               fmtPct(tot.gainPct, loc),
             )})</span>`,
           );
-        return `<div class="total" data-key="total-${esc(tot.unit)}">
-          <div class="k">${svgIcon(ICONS.wallet)}${esc(this._t("portfolio"))}</div>
+        return `<div class="total${tot.noRate ? " norate" : ""}" data-key="total-${esc(tot.unit)}">
+          <div class="k">${svgIcon(ICONS.wallet)}${esc(this._t("portfolio"))}${this._rates(tot)}</div>
           <div class="v">${esc(fmtMoney(tot.value, tot.unit, loc, { decimals: d }))}</div>
           ${parts.length ? `<div class="d">${parts.join("")}</div>` : ""}
         </div>`;
       })
       .join("");
+  }
+
+  // After "Portfolio": the rates a converted total used ("1 USD = 0.9217 €", opening their sensor), or, for a
+  // currency left without a rate, a note saying so.
+  _rates(tot) {
+    const to = targetCurrency(this._config);
+    if (tot.noRate) return `<span class="rate">· ${esc(this._t("no_rate", { to }))}</span>`;
+    return tot.rates
+      .map((r) => {
+        const text = esc(`1 ${r.from} = ${fmtMoney(r.factor, tot.unit, this._loc(), { decimals: 4 })}`);
+        return r.entity
+          ? `<span class="rate clickable" role="button" tabindex="0" data-entity="${esc(r.entity)}">· ${text}</span>`
+          : `<span class="rate">· ${text}</span>`;
+      })
+      .join("");
+  }
+
+  _totals(quotes) {
+    return totals(
+      quotes.filter((q) => !q.missing),
+      { hass: this._hass, config: this._config },
+    );
   }
 
   _row(q) {
@@ -1935,7 +2164,7 @@ class StockCard extends HTMLElement {
   _render() {
     const quotes = this._quotes();
     if (!quotes.length) return this._error("no_entities");
-    const tots = totals(quotes.filter((q) => !q.missing));
+    const tots = this._totals(quotes);
     return `<style>${BASE_STYLE}${FULL_STYLE}${MOTION_STYLE}</style>
       <ha-card>
         ${this._header(quotes, tots)}
@@ -2075,7 +2304,7 @@ class StockMiniCard extends StockCard {
     if (this._zoomed) return super._render();
     const quotes = this._quotes();
     if (!quotes.length) return this._error("no_entities");
-    const tots = totals(quotes.filter((q) => !q.missing));
+    const tots = this._totals(quotes);
     const max = Math.max(1, Number.isInteger(this._config.max_items) ? this._config.max_items : 5);
     const shown = quotes.slice(0, max);
     const loc = this._loc();
@@ -2084,7 +2313,9 @@ class StockMiniCard extends StockCard {
         ? tots
             .map(
               (tot) =>
-                `<div class="mtotal" data-key="total-${esc(tot.unit)}"><span class="muted">${esc(this._t("portfolio"))}</span><span><b>${esc(
+                `<div class="mtotal" data-key="total-${esc(tot.unit)}"><span class="muted lbl">${esc(this._t("portfolio"))}${
+                  tot.noRate ? ` · ${esc(this._t("no_rate", { to: targetCurrency(this._config) }))}` : ""
+                }</span><span><b>${esc(
                   fmtMoney(tot.value, tot.unit, loc, { decimals: this._config.decimals }),
                 )}</b>${tot.pct !== null ? ` <span class="chg ${trend(tot.pct)}">${esc(fmtPct(tot.pct, loc))}</span>` : ""}</span></div>`,
             )
@@ -2109,6 +2340,22 @@ class StockMiniCard extends StockCard {
 // The quotes are picked in an entity list; each one's quantity and purchase price (the portfolio) are number
 // fields named `qty|<entity>` and `cost|<entity>`, folded back into `entities` objects in the saved YAML.
 const PORTFOLIO_FIELD = /^(qty|cost)\|(.+)$/;
+// The sensor of each exchange rate, a field named `rate|<currency>`, folded back into `exchange_rates`.
+const RATE_FIELD = /^rate\|(.+)$/;
+
+// Currencies offered for the total (any other ISO code can be typed in).
+const CURRENCIES = ["EUR", "USD", "GBP", "CHF", "JPY", "CAD", "AUD", "NZD", "HKD", "SGD", "CNY", "INR", "KRW", "SEK", "NOK", "DKK", "PLN", "CZK", "HUF",
+  "RON", "BGN", "RSD", "UAH", "TRY", "ILS", "ZAR", "BRL", "MXN"];
+
+// "EUR — euro", the name in the editor's language when the browser knows it.
+const currencyLabel = (code, locale) => {
+  try {
+    const name = new Intl.DisplayNames([locale], { type: "currency" }).of(code);
+    return name && name !== code ? `${code} — ${name}` : code;
+  } catch (_err) {
+    return code;
+  }
+};
 
 class StockEditorBase extends HTMLElement {
   // [name, default]
@@ -2126,6 +2373,19 @@ class StockEditorBase extends HTMLElement {
     this._render();
   }
 
+  // Currencies of the quotes that need a rate to the `currency` option: the editor offers a sensor for each one
+  // (unless the rate is a number, kept as written in YAML).
+  _rateUnits() {
+    const to = targetCurrency(this._config);
+    if (!to || !this._hass) return [];
+    const rates = this._config.exchange_rates || {};
+    const units = quoteConfigs(this._hass, this._config).map((c) => {
+      const a = this._hass.states?.[c.entity]?.attributes || {};
+      return majorUnit(a.unit_of_measurement || a.currency || a.currencySymbol || "")[0];
+    });
+    return [...new Set(units)].filter((u) => isIso(u) && u !== to && typeof rates[u] !== "number").sort();
+  }
+
   _ids() {
     return quoteConfigs({ states: {} }, { entities: this._config.entities || [] }).map((c) => c.entity);
   }
@@ -2138,6 +2398,29 @@ class StockEditorBase extends HTMLElement {
       { name: "title", selector: { text: {} } },
       { name: "url", selector: { text: { type: "url" } } },
       { name: "entities", selector: { entity: { multiple: true, filter: { domain: "sensor" } } } },
+      {
+        name: "currency",
+        selector: {
+          select: {
+            mode: "dropdown",
+            custom_value: true,
+            options: [{ value: "", label: tr("currency_none") }, ...CURRENCIES.map((value) => ({ value, label: currencyLabel(value, fmtLang(this._hass, this._config)) }))],
+          },
+        },
+      },
+      ...(this._rateUnits().length
+        ? [
+            {
+              type: "grid",
+              name: "",
+              schema: this._rateUnits().map((u) => ({
+                name: `rate|${u}`,
+                label: t(this._hass, this._config, "rate", { from: u, to: targetCurrency(this._config) }),
+                selector: { entity: { filter: { domain: "sensor" } } },
+              })),
+            },
+          ]
+        : []),
       ...(ids.length && this.constructor.portfolio
         ? [
             {
@@ -2197,6 +2480,7 @@ class StockEditorBase extends HTMLElement {
       if (item.quantity !== undefined) data[`qty|${item.entity}`] = item.quantity;
       if (item.purchase_price !== undefined) data[`cost|${item.entity}`] = item.purchase_price;
     }
+    for (const u of this._rateUnits()) if (typeof this._config.exchange_rates?.[u] === "string") data[`rate|${u}`] = this._config.exchange_rates[u];
     return data;
   }
 
@@ -2205,7 +2489,14 @@ class StockEditorBase extends HTMLElement {
   _toConfig(value) {
     const config = {};
     const extra = {};
+    const rates = { ...(value.exchange_rates || {}) };
     for (const [k, v] of Object.entries(value)) {
+      const r = RATE_FIELD.exec(k);
+      if (r) {
+        if (typeof v === "string" && v) rates[r[1]] = v;
+        else delete rates[r[1]];
+        continue;
+      }
       const m = PORTFOLIO_FIELD.exec(k);
       if (m) {
         (extra[m[2]] ??= {})[m[1] === "qty" ? "quantity" : "purchase_price"] = v;
@@ -2224,6 +2515,9 @@ class StockEditorBase extends HTMLElement {
     });
     if (entities.length) config.entities = entities;
     else delete config.entities;
+    if (Object.keys(rates).length) config.exchange_rates = rates;
+    else delete config.exchange_rates;
+    if (typeof config.currency === "string") config.currency = config.currency.trim().toUpperCase();
     const defaults = this._defaults();
     for (const [k, v] of Object.entries(config)) {
       if (v === "" || v === undefined || v === null || (k in defaults && v === defaults[k])) delete config[k];
@@ -2254,7 +2548,7 @@ class StockEditorBase extends HTMLElement {
       this._dataKey = dataKey;
       this._form.data = data;
     }
-    const schemaKey = JSON.stringify([this._ids(), lang(this._hass, this._config)]);
+    const schemaKey = JSON.stringify([this._ids(), lang(this._hass, this._config), targetCurrency(this._config), this._rateUnits()]);
     if (schemaKey !== this._schemaKey) {
       this._schemaKey = schemaKey;
       this._form.schema = this._schema();

@@ -1,6 +1,6 @@
 {
   "name": "ha-stock-card",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Lovelace cards for Home Assistant to follow stock and market quotes (Yahoo Finance and any price sensor).",
   "private": true,
   "type": "module",
