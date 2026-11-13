@@ -225,3 +225,18 @@ test("history: statistics first, state history for the sensors without statistic
   assert.equal(h["sensor.btc"][0].t, 1000, "seconds are read as seconds");
   assert.equal(h["sensor.yahoofinance_aapl"].at(-1).v, 200, "ends on the live price");
 });
+
+test("the mini card folds back on a tap elsewhere, not on a press in the card, and when it leaves the page", () => {
+  const el = make(StockMiniCard, base(), { entities: ["sensor.yahoofinance_aapl"] });
+  el._update = () => {}; // no rendering here, only the state
+  el._zoomed = true;
+  el._unzoom.tap({ composedPath: () => [el] });
+  assert.equal(el._zoomed, true, "a slider pressed in the card and released outside does not fold it");
+  el._unzoom.tap({ composedPath: () => [{ localName: "ha-more-info-dialog" }] });
+  assert.equal(el._zoomed, true, "a tap in a dialog opened from the card keeps it");
+  el._unzoom.tap({ composedPath: () => [] });
+  assert.equal(el._zoomed, false);
+  el._zoomed = true;
+  el.disconnectedCallback();
+  assert.equal(el._zoomed, false, "back compact once off the page");
+});
