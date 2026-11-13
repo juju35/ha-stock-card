@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { load } from "./load.mjs";
 
-const { StockCard, StockMiniCard, quoteOf, quoteConfigs, totals, sortQuotes, marketOf, fmtMoney, fmtPct, spark, downsample, isYahoo, sameSig, trend } = load(
+const { StockCard, StockMiniCard, quoteOf, quoteConfigs, totals, sortQuotes, marketOf, fmtMoney, fmtPct, spark, downsample, isYahoo, sameSig, trend, rateOf } = load(
   "stock-card.js",
-  ["StockCard", "StockMiniCard", "quoteOf", "quoteConfigs", "totals", "sortQuotes", "marketOf", "fmtMoney", "fmtPct", "spark", "downsample", "isYahoo", "sameSig", "trend"],
+  ["StockCard", "StockMiniCard", "quoteOf", "quoteConfigs", "totals", "sortQuotes", "marketOf", "fmtMoney", "fmtPct", "spark", "downsample", "isYahoo", "sameSig", "trend", "rateOf"],
 );
 
 const plain = (v) => JSON.parse(JSON.stringify(v));
@@ -239,4 +239,88 @@ test("the mini card folds back on a tap elsewhere, not on a press in the card, a
   el._zoomed = true;
   el.disconnectedCallback();
   assert.equal(el._zoomed, false, "back compact once off the page");
+});
+
+// Yahoo Finance currency pair: EURUSD=X is the price of 1 EUR in USD.
+const fx = (symbol, price) => ({
+  entity_id: `sensor.yahoofinance_${symbol.toLowerCase().replace("=", "_")}`,
+  state: String(price),
+  attributes: { symbol, regularMarketPrice: price, unit_of_measurement: symbol.slice(3, 6) },
+});
+const near = (a, b, msg) => assert.ok(Math.abs(a - b) < 1e-9, `${msg ?? ""} ${a} != ${b}`);
+
+test("exchange rates: option (currency or pair, number or sensor), then the Yahoo Finance pairs, both directions", () => {
+  const states = { ...base(), "sensor.yahoofinance_eurusd_x": fx("EURUSD=X", 1.25), "sensor.usd_eur": { state: "0.8", attributes: {} } };
+  const hass = hassOf(states);
+  near(rateOf(hass, { currency: "EUR" }, "USD", "EUR").factor, 0.8, "found from EURUSD=X, inverted");
+  assert.equal(rateOf(hass, { currency: "EUR" }, "USD", "EUR").entity, "sensor.yahoofinance_eurusd_x");
+  near(rateOf(hass, { currency: "USD" }, "EUR", "USD").factor, 1.25, "EURUSD=X, as it is");
+  near(rateOf(hass, { exchange_rates: { USD: 0.9 } }, "USD", "EUR").factor, 0.9, "a currency key: 1 USD = 0.9 EUR");
+  near(rateOf(hass, { exchange_rates: { EURUSD: 1.1 } }, "USD", "EUR").factor, 1 / 1.1, "a pair key: 1 EUR = 1.1 USD");
+  near(rateOf(hass, { exchange_rates: { USD: "sensor.usd_eur" } }, "USD", "EUR").factor, 0.8, "a sensor without a pair");
+  near(rateOf(hass, { exchange_rates: { USD: "sensor.yahoofinance_eurusd_x" } }, "USD", "EUR").factor, 0.8, "a Yahoo pair sensor decides the direction");
+  assert.equal(rateOf(hass, {}, "JPY", "EUR"), null, "no rate");
+  assert.equal(rateOf(hassOf({ ...base(), "sensor.bad": { state: "unavailable", attributes: {} } }), { exchange_rates: { JPY: "sensor.bad", CHF: 0 } }, "JPY", "EUR"), null);
+  assert.equal(rateOf(hass, { exchange_rates: { CHF: 0 } }, "CHF", "EUR"), null, "a rate must be positive");
+});
+
+test("currency: one total in that currency, day change and gain converted; a currency with no rate keeps its own", () => {
+  const states = { ...base(), "sensor.yahoofinance_eurusd_x": fx("EURUSD=X", 1.25), "sensor.jp": { state: "1000", attributes: { unit_of_measurement: "JPY" } } };
+  const hass = hassOf(states);
+  const quotes = [
+    quoteOf(hass, { entity: "sensor.yahoofinance_aapl", quantity: 10, purchase_price: 150 }),
+    quoteOf(hass, { entity: "sensor.btc", quantity: 0.5, purchase_price: 40000 }, [{ t: 0, v: 49000 }]),
+    quoteOf(hass, { entity: "sensor.jp", quantity: 2 }),
+  ];
+  const [eur, jpy] = totals(quotes, { hass, config: { currency: "eur" } });
+  assert.equal(eur.unit, "EUR");
+  near(eur.value, 2000 * 0.8 + 25000);
+  near(eur.change, 20 * 0.8, "only the Yahoo quote knows its day change");
+  near(eur.gain, 500 * 0.8 + 5000);
+  near(eur.pct, (100 * 16) / (1600 + 25000 - 16));
+  assert.equal(eur.noRate, false);
+  assert.deepEqual(plain(eur.rates), [{ from: "USD", factor: 0.8, entity: "sensor.yahoofinance_eurusd_x" }]);
+  assert.equal(jpy.unit, "JPY");
+  assert.equal(jpy.value, 2000);
+  assert.equal(jpy.noRate, true);
+  assert.equal(totals(quotes).length, 3, "no currency: one total per currency, as before");
+});
+
+test("currency: London pence are converted through pounds", () => {
+  const states = { "sensor.lse": { state: "500", attributes: { unit_of_measurement: "GBp" } } };
+  const hass = hassOf(states);
+  const [eur] = totals([quoteOf(hass, { entity: "sensor.lse", quantity: 100 })], { hass, config: { currency: "EUR", exchange_rates: { GBP: 1.2 } } });
+  assert.equal(eur.unit, "EUR");
+  near(eur.value, 600, "100 × 500 GBp = 500 GBP = 600 EUR");
+});
+
+test("the cards show the converted total with its rate, or say a currency has no rate", () => {
+  const states = { ...base(), "sensor.yahoofinance_eurusd_x": fx("EURUSD=X", 1.25) };
+  const entities = [{ entity: "sensor.yahoofinance_aapl", quantity: 10 }, { entity: "sensor.btc", quantity: 1 }];
+  const html = make(StockCard, states, { entities, currency: "EUR" })._render();
+  assert.equal((html.match(/class="total/g) || []).length, 1, "one total");
+  assert.match(html, /€51,600\.00/);
+  assert.match(html, /1 USD = €0\.8000/);
+  assert.match(html, /data-entity="sensor\.yahoofinance_eurusd_x"/, "the rate opens its sensor");
+  const none = make(StockCard, base(), { entities, currency: "EUR" })._render();
+  assert.match(none, /class="total norate"/);
+  assert.match(none, /no rate to EUR/);
+  assert.match(none, /\$2,000\.00/, "the dollars stay in dollars");
+  const mini = make(StockMiniCard, base(), { entities, currency: "EUR" })._render();
+  assert.match(mini, /Portfolio · no rate to EUR/);
+  assert.match(make(StockMiniCard, states, { entities, currency: "EUR" })._render(), /€51,600\.00/);
+});
+
+test("the signature follows the exchange rates of a converted total", () => {
+  const states = { ...base(), "sensor.yahoofinance_eurusd_x": fx("EURUSD=X", 1.25), "sensor.rate": { state: "0.9", attributes: {} } };
+  const el = make(StockCard, states, { entities: ["sensor.yahoofinance_aapl"], currency: "EUR", exchange_rates: { CHF: "sensor.rate" } });
+  const sig = el._signature();
+  assert.ok(sig.includes(states["sensor.rate"]));
+  assert.ok(sig.includes(states["sensor.yahoofinance_eurusd_x"]));
+  assert.ok(!make(StockCard, states, { entities: ["sensor.yahoofinance_aapl"] })._signature().includes(states["sensor.yahoofinance_eurusd_x"]));
+});
+
+test("exchange_rates must be a mapping", () => {
+  const el = new StockCard();
+  assert.throws(() => el.setConfig({ exchange_rates: [1] }), /exchange_rates/);
 });

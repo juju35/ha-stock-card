@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 - 2026-11-13
+
+### Features
+- Currency of the portfolio total (`currency`): the total, its change of the day and the gain in one currency, such as euros for a portfolio of US stocks, through the rates of `exchange_rates` (a number or a sensor, per currency or per pair) or, with none given, the Yahoo Finance currency pairs (`EURUSD=X`). The rate used is shown next to the total; a currency with no rate keeps its own total, marked as such. Pence (`GBp`) go through pounds. Both visual editors offer the currency and a rate sensor per currency to convert ([#5](https://github.com/juju35/ha-stock-card/issues/5), suggested by @mielikki33).
+
 ## 1.0.1 - 2026-11-13
 
 ### Fixes

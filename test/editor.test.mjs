@@ -39,3 +39,35 @@ test("editor schemas: portfolio and change display on the full card, max items o
   assert.match(mini, /max_items/);
   assert.match(mini, /"zoom"/);
 });
+
+test("editor: currency and a rate sensor per foreign currency, folded into exchange_rates", () => {
+  const e = editor(StockCardEditor, { entities: ["sensor.a", "sensor.b", "sensor.c"], currency: "EUR", exchange_rates: { GBP: 1.17 } });
+  e._hass = {
+    language: "en",
+    states: {
+      "sensor.a": { state: "1", attributes: { unit_of_measurement: "USD" } },
+      "sensor.b": { state: "1", attributes: { unit_of_measurement: "GBp" } },
+      "sensor.c": { state: "1", attributes: { unit_of_measurement: "EUR" } },
+    },
+  };
+  assert.deepEqual(plain(e._rateUnits()), ["USD"], "no field for the card's currency, nor for a rate given as a number");
+  const schema = JSON.stringify(e._schema());
+  assert.match(schema, /"currency"/);
+  assert.match(schema, /rate\|USD/);
+  assert.match(schema, /USD → EUR rate/);
+  const out = e._toConfig({ ...e._data(), "rate|USD": "sensor.eurusd" });
+  assert.deepEqual(plain(out.exchange_rates), { GBP: 1.17, USD: "sensor.eurusd" });
+  e._config = out;
+  assert.equal(e._data()["rate|USD"], "sensor.eurusd");
+  assert.deepEqual(plain(e._toConfig({ ...e._data(), "rate|USD": undefined }).exchange_rates), { GBP: 1.17 });
+  assert.equal(e._toConfig({ ...e._data(), currency: "usd" }).currency, "USD");
+  assert.equal(e._toConfig({ ...e._data(), currency: "" }).currency, undefined, "no currency: left out");
+});
+
+test("editor: the mini card offers the currency too, no rate field without a currency", () => {
+  const e = editor(StockMiniCardEditor, { entities: ["sensor.a"] });
+  e._hass = { language: "en", states: { "sensor.a": { state: "1", attributes: { unit_of_measurement: "USD" } } } };
+  const schema = JSON.stringify(e._schema());
+  assert.match(schema, /"currency"/);
+  assert.doesNotMatch(schema, /rate\|/);
+});

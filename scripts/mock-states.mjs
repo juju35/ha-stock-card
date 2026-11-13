@@ -49,3 +49,5 @@ const generic = (id, state, unit, name) => {
 };
 ids.btc = generic("sensor.bitcoin_price", 84250.4, "EUR", "Bitcoin");
 ids.gold = generic("sensor.gold_price", 2648.3, "USD", "Gold (ounce)");
+// An exchange rate (1 EUR in USD), for the portfolio total converted to euros.
+ids.eurusd = generic("sensor.eur_usd", 1.0862, "USD", "EUR/USD");

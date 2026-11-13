@@ -13,10 +13,23 @@ const portfolio = {
   ],
 };
 
+// US stocks, the total shown in euros through an exchange rate sensor (1 EUR in USD).
+const usPortfolio = {
+  title: "US stocks",
+  currency: "EUR",
+  exchange_rates: { EURUSD: ids.eurusd },
+  entities: [
+    { entity: ids.aapl, quantity: 12, purchase_price: 168.4 },
+    { entity: ids.msft, quantity: 5, purchase_price: 377 },
+    { entity: ids.nvda, quantity: 30, purchase_price: 118.2 },
+  ],
+};
+
 // Every capture is rendered in both themes: each light shot gets a `-dark` twin with the exact same setup.
 const lightShots = [
   { file: "card", type: "stock-card", theme: "light", width: 460, config: {} },
   { file: "card-portfolio", type: "stock-card", theme: "light", width: 460, config: { ...portfolio, sort_by: "value" } },
+  { file: "card-currency", type: "stock-card", theme: "light", width: 460, config: usPortfolio },
   { file: "card-generic", type: "stock-card", theme: "light", width: 460, config: { title: "Commodities", entities: [ids.btc, ids.gold], history_period: "5d" } },
   { file: "mini-card", type: "stock-mini-card", theme: "light", width: 380, config: { max_items: 5 } },
   { file: "mini-card-portfolio", type: "stock-mini-card", theme: "light", width: 380, config: portfolio },

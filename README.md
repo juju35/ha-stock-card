@@ -35,13 +35,13 @@ Yahoo Finance sensors are **discovered automatically**: with no configuration, t
 - Automatic discovery of the Yahoo Finance sensors, or your own list of quotes, mixing Yahoo Finance and any price sensor
 - Price in its currency, formatted for your language, and the change of the day in value and percentage, green or red
 - Sparkline of each quote over 24 hours, 5 days, 1 month, 3 months or 1 year, from the recorder's statistics (or the state history of a sensor without statistics), coloured by its own trend
-- Optional portfolio: give a quantity (and a purchase price) per quote to get the value of each position, the portfolio total, its change of the day and your gain, one total per currency
+- Optional portfolio: give a quantity (and a purchase price) per quote to get the value of each position, the portfolio total, its change of the day and your gain, one total per currency or all in the currency of your choice (`currency`)
 - Market status chip (open, pre-market, after hours, closed) from Yahoo Finance
 - Sort menu in the card: card order, name, change or position value (`sort_by` sets the default)
 - A new price flashes in the colour of its move
 - Click any quote to open its Home Assistant history (more-info dialog)
 - Detail button at the top right of the mini card: it switches to the full card and back; a click anywhere outside the card brings the compact view back
-- Visual editor in the dashboard UI for both cards, quantities and purchase prices included (no YAML needed)
+- Visual editor in the dashboard UI for both cards, quantities, purchase prices, currency and exchange rate sensors included (no YAML needed)
 - Light and dark mode; English, French, German, Spanish, Serbian (Cyrillic and Latin), Italian, Dutch, European Portuguese, Polish, Romanian, Danish, Swedish, Bulgarian, Russian, Ukrainian, Hungarian, Slovak, Czech, Slovenian, Latvian and Greek
 - Single file, no external dependency
 
@@ -125,6 +125,9 @@ show_name: true
 show_history: true
 show_total: true
 show_market_state: true
+currency: EUR
+exchange_rates:
+  USD: sensor.yahoofinance_eurusd_x
 language: fr
 ```
 
@@ -157,6 +160,8 @@ zoom: true
 | `decimals` | both | `2` (`4` under 1) | Decimals of the prices and amounts |
 | `show_name` | full | `true` | Company name under the symbol |
 | `show_total` | both | `true` | Portfolio total (shown when at least one quote has a `quantity`) |
+| `currency` | both | — | Currency of the portfolio total, its day change and the gain (ISO code: `EUR`, `USD`, `GBP`…); without it, one total per currency. See [Currency of the total](#currency-of-the-total) |
+| `exchange_rates` | both | Yahoo Finance pairs | Rates used by `currency`: per currency (`USD: 0.92`, 1 USD = 0.92 of `currency`) or per pair (`EURUSD: 1.085`, 1 EUR = 1.085 USD), a number or a sensor. Without it, a Yahoo Finance currency pair (`EURUSD=X` or `USDEUR=X`) is used when there is one |
 | `show_market_state` | both | `true` | Market status chip (Yahoo Finance quotes only) |
 | `max_items` | mini | `5` | Quotes shown in the compact view; the others are counted below (`+2 more`) and shown by the detail button |
 | `zoom` | mini | `true` | Detail button at the top right: switches to the full card and back (`false` removes it) |
@@ -166,12 +171,48 @@ zoom: true
 
 Give a `quantity` to the quotes you hold (and, optionally, the `purchase_price` paid per share): each row then shows the number held and the position value, and a total sits above the list with the change of the day and, when purchase prices are set, the gain against them.
 
-Totals are made per currency, without conversion: a portfolio holding euros and dollars shows two totals. The day change only adds the quotes that know it (Yahoo Finance); a sensor whose change comes from its history counts in the value and the gain, not in the day change.
+Totals are made per currency: a portfolio holding euros and dollars shows two totals, unless `currency` converts them into one (see below). The day change only adds the quotes that know it (Yahoo Finance); a sensor whose change comes from its history counts in the value and the gain, not in the day change.
 
 | Light | Dark |
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-stock-card/main/screenshots/card-portfolio.png" alt="card with a portfolio" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-stock-card/main/screenshots/card-portfolio-dark.png" alt="card with a portfolio dark" width="400"> |
 | <img src="https://raw.githubusercontent.com/juju35/ha-stock-card/main/screenshots/mini-card-portfolio.png" alt="mini card with a portfolio" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-stock-card/main/screenshots/mini-card-portfolio-dark.png" alt="mini card with a portfolio dark" width="400"> |
+
+### Currency of the total
+
+Set `currency` to show the portfolio total, its change of the day and the gain in one currency, for instance in euros for a portfolio of US stocks. The prices and the position values of the rows stay in each quote's own currency.
+
+The rates are taken, in this order:
+
+1. from `exchange_rates`, a number or a sensor per currency (`USD: 0.92`: 1 USD = 0.92 EUR) or per pair (`EURUSD: sensor.eur_usd`: 1 EUR = 1.0862 USD, the market's way of quoting it). A Yahoo Finance pair sensor (`EURUSD=X`) is read the right way round whatever key it is given under;
+2. else from the Yahoo Finance currency pairs of Home Assistant: add the symbol `EURUSD=X` (or `USDEUR=X`) to the integration and nothing else is needed.
+
+```yaml
+type: custom:stock-card
+title: US stocks
+currency: EUR
+entities:
+  - entity: sensor.yahoofinance_aapl
+    quantity: 12
+    purchase_price: 168.4
+  - entity: sensor.yahoofinance_msft
+    quantity: 5
+    purchase_price: 377
+  - entity: sensor.yahoofinance_nvda
+    quantity: 30
+    purchase_price: 118.2
+# Optional with a Yahoo Finance EURUSD=X sensor, found on its own:
+exchange_rates:
+  EURUSD: sensor.yahoofinance_eurusd_x
+```
+
+The rate used is shown next to **Portfolio** (`1 USD = €0.9206`, a click opens its sensor). A currency with no rate is not converted: it keeps its own total, marked `no rate to EUR`. Prices in pence (`GBp`, London) are converted through pounds, and cents (`ZAc`) and agorot (`ILA`) likewise.
+
+Amounts are converted at the current rate: the day change and the gain are those of the stocks, without the move of the currency itself (purchase prices are in the quote's currency).
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-stock-card/main/screenshots/card-currency.png" alt="card with a total in euros" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-stock-card/main/screenshots/card-currency-dark.png" alt="card with a total in euros dark" width="400"> |
 
 ## Other price sensors
 
