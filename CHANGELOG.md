@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.1 - 2026-11-14
+
+### Fixes
+- **Visual editor**: `decimals` was missing from both editors; it is offered now, labelled in all 22 languages.
+- **Mini card visual editor**: its detail view is the full card, but its editor left out the title, subtitle, company names, change shown and the **Portfolio** section (quantity and purchase price per quote), though the compact view shows the portfolio total. It now offers every option of the full card, plus the compact view's length and the detail button.
+- **README**: `change_display` and `show_name` are marked as working on both cards, and the numbers and pairs of `exchange_rates` as YAML only (the visual editor keeps them).
+
 ## 1.1.0 - 2026-11-13
 
 ### Features

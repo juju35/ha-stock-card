@@ -29,15 +29,23 @@ test("editor: clearing a quantity writes the id back, removing every quote remov
   assert.equal(e._toConfig({ ...e._data(), entities: [] }).entities, undefined);
 });
 
-test("editor schemas: portfolio and change display on the full card, max items on the mini card", () => {
-  const names = (schema) => JSON.stringify(schema);
+test("editor schemas: the mini card offers the full card's options (its detail view), plus max items and zoom", () => {
+  const names = (schema) => schema.flatMap((s) => (s.schema ? names(s.schema) : [s.name])).filter(Boolean);
   const full = names(editor(StockCardEditor, { entities: ["sensor.a"] })._schema());
-  assert.match(full, /qty\|sensor\.a/);
-  assert.match(full, /change_display/);
+  for (const name of ["qty|sensor.a", "cost|sensor.a", "change_display", "decimals", "show_title", "show_subtitle"]) assert.ok(full.includes(name), name);
+  assert.ok(!full.includes("max_items"));
+  assert.ok(!full.includes("zoom"));
   const mini = names(editor(StockMiniCardEditor, { entities: ["sensor.a"] })._schema());
-  assert.doesNotMatch(mini, /qty\|/);
-  assert.match(mini, /max_items/);
-  assert.match(mini, /"zoom"/);
+  for (const name of full) assert.ok(mini.includes(name), `mini editor misses ${name}`);
+  assert.ok(mini.includes("max_items"));
+  assert.ok(mini.includes("zoom"));
+});
+
+test("editor: decimals is kept when set, left out when emptied", () => {
+  const e = editor(StockMiniCardEditor, { entities: ["sensor.a"] });
+  assert.equal(e._toConfig({ ...e._data(), decimals: 3 }).decimals, 3);
+  assert.equal(e._toConfig({ ...e._data(), decimals: undefined }).decimals, undefined);
+  assert.equal(e._data().show_title, true);
 });
 
 test("editor: currency and a rate sensor per foreign currency, folded into exchange_rates", () => {

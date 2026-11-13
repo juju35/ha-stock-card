@@ -69,6 +69,7 @@ const STRINGS = {
     show_total: "Show the portfolio total",
     show_market_state: "Show the market status",
     max_items: "Quotes shown in the compact view",
+    decimals: "Decimals of the prices (empty: 2, 4 under 1)",
     zoom: "Detail button",
     zoom_helper: "Switches the mini card to the full card and back",
     portfolio_section: "Portfolio (optional)",
@@ -125,6 +126,7 @@ const STRINGS = {
     show_total: "Afficher le total du portefeuille",
     show_market_state: "Afficher l'état du marché",
     max_items: "Valeurs affichées en vue compacte",
+    decimals: "Décimales des prix (vide : 2, 4 sous 1)",
     zoom: "Bouton détail",
     zoom_helper: "Bascule la mini-carte vers la carte complète et inversement",
     portfolio_section: "Portefeuille (facultatif)",
@@ -181,6 +183,7 @@ const STRINGS = {
     show_total: "Depotsumme anzeigen",
     show_market_state: "Marktstatus anzeigen",
     max_items: "In der Kompaktansicht angezeigte Werte",
+    decimals: "Nachkommastellen der Kurse (leer: 2, 4 unter 1)",
     zoom: "Detail-Schaltfläche",
     zoom_helper: "Schaltet die Mini-Karte zur vollständigen Karte und zurück",
     portfolio_section: "Depot (optional)",
@@ -237,6 +240,7 @@ const STRINGS = {
     show_total: "Mostrar el total de la cartera",
     show_market_state: "Mostrar el estado del mercado",
     max_items: "Valores mostrados en la vista compacta",
+    decimals: "Decimales de los precios (vacío: 2, 4 por debajo de 1)",
     zoom: "Botón de detalle",
     zoom_helper: "Cambia la minitarjeta a la tarjeta completa y viceversa",
     portfolio_section: "Cartera (opcional)",
@@ -294,6 +298,7 @@ const STRINGS = {
     show_total: "Прикажи укупан портфолио",
     show_market_state: "Прикажи стање тржишта",
     max_items: "Котације у сажетом приказу",
+    decimals: "Децимале цена (празно: 2, 4 испод 1)",
     zoom: "Дугме за детаље",
     zoom_helper: "Пребацује мини картицу на целу картицу и назад",
     portfolio_section: "Портфолио (опционо)",
@@ -351,6 +356,7 @@ const STRINGS = {
     show_total: "Prikaži ukupan portfolio",
     show_market_state: "Prikaži stanje tržišta",
     max_items: "Kotacije u sažetom prikazu",
+    decimals: "Decimale cena (prazno: 2, 4 ispod 1)",
     zoom: "Dugme za detalje",
     zoom_helper: "Prebacuje mini karticu na celu karticu i nazad",
     portfolio_section: "Portfolio (opciono)",
@@ -407,6 +413,7 @@ const STRINGS = {
     show_total: "Mostra il totale del portafoglio",
     show_market_state: "Mostra lo stato del mercato",
     max_items: "Titoli mostrati nella vista compatta",
+    decimals: "Decimali dei prezzi (vuoto: 2, 4 sotto 1)",
     zoom: "Pulsante dettagli",
     zoom_helper: "Passa dalla mini scheda alla scheda completa e viceversa",
     portfolio_section: "Portafoglio (facoltativo)",
@@ -463,6 +470,7 @@ const STRINGS = {
     show_total: "Totaal van de portefeuille tonen",
     show_market_state: "Marktstatus tonen",
     max_items: "Noteringen in de compacte weergave",
+    decimals: "Decimalen van de koersen (leeg: 2, 4 onder 1)",
     zoom: "Detailknop",
     zoom_helper: "Schakelt de minikaart naar de volledige kaart en terug",
     portfolio_section: "Portefeuille (optioneel)",
@@ -519,6 +527,7 @@ const STRINGS = {
     show_total: "Mostrar o total da carteira",
     show_market_state: "Mostrar o estado do mercado",
     max_items: "Títulos mostrados na vista compacta",
+    decimals: "Casas decimais dos preços (vazio: 2, 4 abaixo de 1)",
     zoom: "Botão de detalhe",
     zoom_helper: "Alterna o minicartão para o cartão completo e de volta",
     portfolio_section: "Carteira (opcional)",
@@ -577,6 +586,7 @@ const STRINGS = {
     show_total: "Pokaż sumę portfela",
     show_market_state: "Pokaż stan rynku",
     max_items: "Notowania w widoku kompaktowym",
+    decimals: "Miejsca po przecinku cen (puste: 2, 4 poniżej 1)",
     zoom: "Przycisk szczegółów",
     zoom_helper: "Przełącza minikartę na pełną kartę i z powrotem",
     portfolio_section: "Portfel (opcjonalnie)",
@@ -634,6 +644,7 @@ const STRINGS = {
     show_total: "Afișează totalul portofoliului",
     show_market_state: "Afișează starea pieței",
     max_items: "Cotații afișate în vizualizarea compactă",
+    decimals: "Zecimalele prețurilor (gol: 2, 4 sub 1)",
     zoom: "Buton de detalii",
     zoom_helper: "Comută mini-cardul la cardul complet și înapoi",
     portfolio_section: "Portofoliu (opțional)",
@@ -690,6 +701,7 @@ const STRINGS = {
     show_total: "Vis porteføljens total",
     show_market_state: "Vis markedets status",
     max_items: "Kurser vist i kompakt visning",
+    decimals: "Decimaler for kurserne (tom: 2, 4 under 1)",
     zoom: "Detaljeknap",
     zoom_helper: "Skifter minikortet til hele kortet og tilbage",
     portfolio_section: "Portefølje (valgfri)",
@@ -746,6 +758,7 @@ const STRINGS = {
     show_total: "Visa portföljens totalvärde",
     show_market_state: "Visa marknadens status",
     max_items: "Kurser som visas i kompakt vy",
+    decimals: "Decimaler för kurserna (tomt: 2, 4 under 1)",
     zoom: "Detaljknapp",
     zoom_helper: "Växlar minikortet till hela kortet och tillbaka",
     portfolio_section: "Portfölj (valfri)",
@@ -802,6 +815,7 @@ const STRINGS = {
     show_total: "Покажи общата стойност на портфейла",
     show_market_state: "Покажи състоянието на пазара",
     max_items: "Котировки в компактния изглед",
+    decimals: "Десетични знаци на цените (празно: 2, 4 под 1)",
     zoom: "Бутон за подробности",
     zoom_helper: "Превключва мини картата към цялата карта и обратно",
     portfolio_section: "Портфейл (по избор)",
@@ -860,6 +874,7 @@ const STRINGS = {
     show_total: "Показывать итог портфеля",
     show_market_state: "Показывать состояние рынка",
     max_items: "Котировки в компактном виде",
+    decimals: "Знаков после запятой в ценах (пусто: 2, 4 ниже 1)",
     zoom: "Кнопка подробностей",
     zoom_helper: "Переключает мини-карточку на полную карточку и обратно",
     portfolio_section: "Портфель (необязательно)",
@@ -918,6 +933,7 @@ const STRINGS = {
     show_total: "Показувати підсумок портфеля",
     show_market_state: "Показувати стан ринку",
     max_items: "Котирування в компактному вигляді",
+    decimals: "Знаків після коми в цінах (порожньо: 2, 4 нижче 1)",
     zoom: "Кнопка подробиць",
     zoom_helper: "Перемикає міні-картку на повну картку і назад",
     portfolio_section: "Портфель (необов'язково)",
@@ -974,6 +990,7 @@ const STRINGS = {
     show_total: "Portfólió összértékének megjelenítése",
     show_market_state: "Piac állapotának megjelenítése",
     max_items: "Kompakt nézetben megjelenített árfolyamok",
+    decimals: "Árak tizedesjegyei (üres: 2, 1 alatt 4)",
     zoom: "Részletek gomb",
     zoom_helper: "A mini kártyát a teljes kártyára váltja és vissza",
     portfolio_section: "Portfólió (nem kötelező)",
@@ -1031,6 +1048,7 @@ const STRINGS = {
     show_total: "Zobraziť súčet portfólia",
     show_market_state: "Zobraziť stav trhu",
     max_items: "Kurzy v kompaktnom zobrazení",
+    decimals: "Desatinné miesta cien (prázdne: 2, pod 1 4)",
     zoom: "Tlačidlo detailu",
     zoom_helper: "Prepne minikartu na celú kartu a späť",
     portfolio_section: "Portfólio (voliteľné)",
@@ -1088,6 +1106,7 @@ const STRINGS = {
     show_total: "Zobrazit součet portfolia",
     show_market_state: "Zobrazit stav trhu",
     max_items: "Kurzy v kompaktním zobrazení",
+    decimals: "Desetinná místa cen (prázdné: 2, pod 1 4)",
     zoom: "Tlačítko detailu",
     zoom_helper: "Přepne minikartu na celou kartu a zpět",
     portfolio_section: "Portfolio (volitelné)",
@@ -1146,6 +1165,7 @@ const STRINGS = {
     show_total: "Prikaži skupno vrednost portfelja",
     show_market_state: "Prikaži stanje trga",
     max_items: "Tečaji v strnjenem pogledu",
+    decimals: "Decimalna mesta cen (prazno: 2, pod 1 4)",
     zoom: "Gumb za podrobnosti",
     zoom_helper: "Preklopi mini kartico na celotno kartico in nazaj",
     portfolio_section: "Portfelj (neobvezno)",
@@ -1203,6 +1223,7 @@ const STRINGS = {
     show_total: "Rādīt portfeļa kopsummu",
     show_market_state: "Rādīt tirgus stāvokli",
     max_items: "Kompaktajā skatā rādītās kotācijas",
+    decimals: "Cenu decimāldaļas (tukšs: 2, zem 1 — 4)",
     zoom: "Detaļu poga",
     zoom_helper: "Pārslēdz mini kartīti uz pilno kartīti un atpakaļ",
     portfolio_section: "Portfelis (neobligāts)",
@@ -1259,6 +1280,7 @@ const STRINGS = {
     show_total: "Εμφάνιση συνόλου χαρτοφυλακίου",
     show_market_state: "Εμφάνιση κατάστασης αγοράς",
     max_items: "Μετοχές στη συμπαγή προβολή",
+    decimals: "Δεκαδικά ψηφία των τιμών (κενό: 2, κάτω από 1: 4)",
     zoom: "Κουμπί λεπτομερειών",
     zoom_helper: "Εναλλάσσει τη μίνι κάρτα με την πλήρη κάρτα",
     portfolio_section: "Χαρτοφυλάκιο (προαιρετικό)",
@@ -2421,7 +2443,7 @@ class StockEditorBase extends HTMLElement {
             },
           ]
         : []),
-      ...(ids.length && this.constructor.portfolio
+      ...(ids.length
         ? [
             {
               type: "expandable",
@@ -2447,16 +2469,14 @@ class StockEditorBase extends HTMLElement {
             selector: { select: { mode: "dropdown", options: Object.keys(PERIODS).map((value) => ({ value, label: tr(`period_${value}`) })) } },
           },
           { name: "sort_by", selector: { select: { mode: "dropdown", options: SORTS.map((value) => ({ value, label: tr(`sort_${value}`) })) } } },
-          ...(this.constructor.portfolio
-            ? [
-                {
-                  name: "change_display",
-                  selector: {
-                    select: { mode: "dropdown", options: ["both", "percent", "absolute"].map((value) => ({ value, label: tr(`change_${value}`) })) },
-                  },
-                },
-              ]
-            : [{ name: "max_items", selector: { number: { min: 1, max: 20, step: 1, mode: "box" } } }]),
+          {
+            name: "change_display",
+            selector: {
+              select: { mode: "dropdown", options: ["both", "percent", "absolute"].map((value) => ({ value, label: tr(`change_${value}`) })) },
+            },
+          },
+          ...(this.constructor.mini ? [{ name: "max_items", selector: { number: { min: 1, max: 20, step: 1, mode: "box" } } }] : []),
+          { name: "decimals", selector: { number: { min: 0, max: 8, step: 1, mode: "box" } } },
         ],
       },
       { type: "grid", name: "", schema: this.constructor.toggles.map(([n]) => ({ name: n, selector: { boolean: {} } })) },
@@ -2557,8 +2577,8 @@ class StockEditorBase extends HTMLElement {
 }
 
 class StockCardEditor extends StockEditorBase {
-  static get portfolio() {
-    return true;
+  static get mini() {
+    return false;
   }
 
   static get toggles() {
@@ -2573,18 +2593,15 @@ class StockCardEditor extends StockEditorBase {
   }
 }
 
-class StockMiniCardEditor extends StockEditorBase {
-  static get portfolio() {
-    return false;
+// The mini card's detail view is the full card: its editor offers the full card's options, plus the compact view's
+// length and the detail button.
+class StockMiniCardEditor extends StockCardEditor {
+  static get mini() {
+    return true;
   }
 
   static get toggles() {
-    return [
-      ["show_history", true],
-      ["show_total", true],
-      ["show_market_state", true],
-      ["zoom", true],
-    ];
+    return [...StockCardEditor.toggles, ["zoom", true]];
   }
 }
 
