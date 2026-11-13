@@ -8,6 +8,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/juju35/ha-stock-card/blob/main/LICENSE)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/julienstep9)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/juju35/ha-stock-card/main/images/yahoofinance.png" alt="Yahoo Finance" width="64">
+</p>
+
 Lovelace cards for Home Assistant to follow stock and market quotes: price, change of the day, sparkline and the total of your portfolio at a glance.
 
 Supported integrations:
@@ -43,7 +47,7 @@ Yahoo Finance sensors are **discovered automatically**: with no configuration, t
 
 | Integration | What the cards show |
 |---|---|
-| [Yahoo Finance](https://github.com/iprak/yahoofinance) (Marketplace) | Everything: symbol and company name, price in its currency, change of the day (`regularMarketChange`, `regularMarketChangePercent`), market status (`marketState`), sparkline |
+| <img src="https://raw.githubusercontent.com/juju35/ha-stock-card/main/images/yahoofinance.png" alt="" width="16"> [Yahoo Finance](https://github.com/iprak/yahoofinance) (Marketplace) | Everything: symbol and company name, price in its currency, change of the day (`regularMarketChange`, `regularMarketChangePercent`), market status (`marketState`), sparkline |
 | Any numeric sensor with a price | Name, price with its unit (an ISO currency code such as `EUR` is shown with its symbol), sparkline; the change is the change over the sparkline's period, from the sensor's history (`· 24 h` after it), unless the sensor has `change` / `change_percent` or `previous_close` attributes |
 
 ## Prerequisites
