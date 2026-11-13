@@ -1,0 +1,19 @@
+{
+  "name": "ha-stock-card",
+  "version": "1.0.0",
+  "description": "Lovelace cards for Home Assistant to follow stock and market quotes (Yahoo Finance and any price sensor).",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs && node --check dist/stock-card.js",
+    "screenshots": "node scripts/screenshots.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "acorn": "^8.19.0",
+    "css-tree": "^3.2.1",
+    "playwright": "^1.56.1"
+  }
+}
