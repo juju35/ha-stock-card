@@ -86,7 +86,7 @@ Or manually:
 
 ### Visual editor
 
-Edit a dashboard, click **Add card** and search for **Stock Card** or **Stock Mini Card**. With no quote selected, the card lists every Yahoo Finance sensor; pick quotes in the list to choose them and their order. On the full card, the **Portfolio** section takes a quantity and a purchase price per quote. The preview updates live, and options left at their default are kept out of the generated YAML.
+Edit a dashboard, click **Add card** and search for **Stock Card** or **Stock Mini Card**. With no quote selected, the card lists every Yahoo Finance sensor; pick quotes in the list to choose them and their order. On both cards, the **Portfolio** section takes a quantity and a purchase price per quote. The preview updates live, and options left at their default are kept out of the generated YAML.
 
 ### Minimal
 
@@ -156,15 +156,15 @@ zoom: true
 | `history_period` | both | `1d` | Sparkline period: `1d` (24 hours), `5d`, `1m`, `3m` or `1y`. 24 hours uses the 5-minute statistics, 5 days and 1 month the hourly ones, 3 months and 1 year the daily ones |
 | `show_history` | both | `true` | Sparklines (full card: next to each price; mini card: behind each row) |
 | `sort_by` | both | `none` | Default order: `none` (card order), `name`, `change` (day change in %, highest first) or `value` (position value, highest first); the menu in the full card changes it until the page is reloaded |
-| `change_display` | full | `both` | Change shown under each price: `both` (`+1.24 (+0.83%)`), `percent` or `absolute` |
+| `change_display` | both | `both` | Change shown under each price: `both` (`+1.24 (+0.83%)`), `percent` or `absolute` |
 | `decimals` | both | `2` (`4` under 1) | Decimals of the prices and amounts |
-| `show_name` | full | `true` | Company name under the symbol |
+| `show_name` | both | `true` | Company name under the symbol |
 | `show_total` | both | `true` | Portfolio total (shown when at least one quote has a `quantity`) |
 | `currency` | both | — | Currency of the portfolio total, its day change and the gain (ISO code: `EUR`, `USD`, `GBP`…); without it, one total per currency. See [Currency of the total](#currency-of-the-total) |
-| `exchange_rates` | both | Yahoo Finance pairs | Rates used by `currency`: per currency (`USD: 0.92`, 1 USD = 0.92 of `currency`) or per pair (`EURUSD: 1.085`, 1 EUR = 1.085 USD), a number or a sensor. Without it, a Yahoo Finance currency pair (`EURUSD=X` or `USDEUR=X`) is used when there is one |
+| `exchange_rates` | both | Yahoo Finance pairs | Rates used by `currency`: per currency (`USD: 0.92`, 1 USD = 0.92 of `currency`) or per pair (`EURUSD: 1.085`, 1 EUR = 1.085 USD), a number or a sensor. Without it, a Yahoo Finance currency pair (`EURUSD=X` or `USDEUR=X`) is used when there is one. The visual editor offers a sensor per currency; numbers and pairs are YAML only (the visual editor keeps them) |
 | `show_market_state` | both | `true` | Market status chip (Yahoo Finance quotes only) |
 | `max_items` | mini | `5` | Quotes shown in the compact view; the others are counted below (`+2 more`) and shown by the detail button |
-| `zoom` | mini | `true` | Detail button at the top right: switches to the full card and back (`false` removes it) |
+| `zoom` | mini | `true` | Detail button at the top right: switches to the full card and back (`false` removes it). The full card's options (`change_display`, `show_name`, the portfolio…) apply to that view, and can be set on the mini card too, in its visual editor as well |
 | `language` | both | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
 
 ## Portfolio
