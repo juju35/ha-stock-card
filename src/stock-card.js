@@ -1955,6 +1955,45 @@ const fmtNumber = (v, locale) => nf(locale, { maximumFractionDigits: 4 }).format
 // A click inside a dialog (more-info opened from the card, say) is not a click outside the card.
 const inDialog = (ev) => ev.composedPath().some((n) => ["ha-more-info-dialog", "ha-dialog", "dialog"].includes(n.localName));
 
+// A click or tap outside of the card, and not in a Home Assistant dialog opened from it.
+const isOutside = (card, ev) => !ev.composedPath().includes(card) && !inDialog(ev);
+
+// "A click elsewhere" is caught on the pointer, not only on the click event: on iOS (Safari and the companion app)
+// a tap on something that is not clickable (the background, an empty spot, a card with no action) sends no click to
+// the page. It counts when the press and the release are both outside the card (a slider dragged out of the card
+// does not fold it), and a scroll does not count (the browser cancels the pointer). Keyboard clicks still go through
+// the click event.
+const watchOutside = (card, handler) => {
+  let downOutside = false;
+  const onDown = (ev) => {
+    downOutside = isOutside(card, ev);
+  };
+  const onUp = (ev) => {
+    if (downOutside && isOutside(card, ev)) handler(ev);
+    downOutside = false;
+  };
+  const onClick = (ev) => {
+    if (ev.detail === 0 && isOutside(card, ev)) handler(ev);
+  };
+  return {
+    on() {
+      document.addEventListener("pointerdown", onDown, true);
+      document.addEventListener("pointerup", onUp, true);
+      document.addEventListener("click", onClick, true);
+    },
+    // A tap (press and release at the same spot), for the tests.
+    tap(ev) {
+      onDown(ev);
+      onUp(ev);
+    },
+    off() {
+      document.removeEventListener("pointerdown", onDown, true);
+      document.removeEventListener("pointerup", onUp, true);
+      document.removeEventListener("click", onClick, true);
+    },
+  };
+};
+
 // The mini card extends the full card: its detail button (top right, `zoom: false` removes it) switches it to the
 // full card's content, same configuration, and back; a click anywhere outside the card brings it back too.
 class StockMiniCard extends StockCard {
@@ -1966,17 +2005,21 @@ class StockMiniCard extends StockCard {
     super();
     this._zoomed = false;
     this.shadowRoot.addEventListener("click", (ev) => this._zoomClick(ev), true);
-    this._onUnzoom = (ev) => {
-      if (this._zoomed && !ev.composedPath().includes(this) && !inDialog(ev)) this._setZoom(false);
-    };
+    this._unzoom = watchOutside(this, () => {
+      if (this._zoomed) this._setZoom(false);
+    });
   }
 
   connectedCallback() {
-    document.addEventListener("click", this._onUnzoom, true);
+    this._unzoom.on();
+    // Back on the page after leaving it: rendered again in the compact view.
+    if (this._hass && this._config) this._update();
   }
 
   disconnectedCallback() {
-    document.removeEventListener("click", this._onUnzoom, true);
+    this._unzoom.off();
+    // Left (another dashboard view, a conditional card hidden): back to the compact view.
+    this._zoomed = false;
   }
 
   // A config change (the editor, say) starts over from the compact view.
