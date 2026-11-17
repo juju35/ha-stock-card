@@ -12,8 +12,10 @@ const VERSION = "__VERSION__";
 const YAHOO_SITE = "https://finance.yahoo.com";
 
 const ICONS = {
-  // mdi:chart-line, the header icon.
-  chart: "M16,11.78L20.24,4.45L21.97,5.45L16.74,14.5L10.23,10.75L5.46,19H22V21H2V3H4V17.54L9.5,8L16,11.78Z",
+  // mdi:trending-up, mdi:trending-down and mdi:trending-neutral: the header icon, after the day's status.
+  up: "M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z",
+  down: "M16,18L18.29,15.71L13.41,10.83L9.41,14.83L2,7.41L3.41,6L9.41,12L13.41,8L19.71,14.29L22,12V18H16Z",
+  flat: "M22,12L18,8V11H3V13H18V16L22,12Z",
   // mdi:sort, the sort menu.
   sort: "M3,13H15V11H3M3,6V8H21V6M3,18H9V16H3V18Z",
   // mdi:wallet-outline, the portfolio total.
@@ -82,6 +84,11 @@ const STRINGS = {
     no_rate: "no rate to {to}",
     language: "Language",
     lang_auto: "Automatic",
+    illustration: "Animated illustration",
+    illustration_theme: "Illustration theme",
+    theme_auto: "Automatic (sun or dark theme)",
+    theme_day: "Day",
+    theme_night: "Night",
   },
   fr: {
     title_default: "Bourse",
@@ -139,6 +146,11 @@ const STRINGS = {
     no_rate: "pas de taux vers {to}",
     language: "Langue",
     lang_auto: "Automatique",
+    illustration: "Illustration animée",
+    illustration_theme: "Thème de l’illustration",
+    theme_auto: "Automatique (soleil ou thème sombre)",
+    theme_day: "Jour",
+    theme_night: "Nuit",
   },
   de: {
     title_default: "Börse",
@@ -196,6 +208,11 @@ const STRINGS = {
     no_rate: "kein Kurs nach {to}",
     language: "Sprache",
     lang_auto: "Automatisch",
+    illustration: "Animierte Illustration",
+    illustration_theme: "Thema der Illustration",
+    theme_auto: "Automatisch (Sonne oder dunkles Design)",
+    theme_day: "Tag",
+    theme_night: "Nacht",
   },
   es: {
     title_default: "Bolsa",
@@ -253,6 +270,11 @@ const STRINGS = {
     no_rate: "sin tipo a {to}",
     language: "Idioma",
     lang_auto: "Automático",
+    illustration: "Ilustración animada",
+    illustration_theme: "Tema de la ilustración",
+    theme_auto: "Automático (sol o tema oscuro)",
+    theme_day: "Día",
+    theme_night: "Noche",
   },
   sr: {
     title_default: "Берза",
@@ -311,6 +333,11 @@ const STRINGS = {
     no_rate: "нема курса за {to}",
     language: "Језик",
     lang_auto: "Аутоматски",
+    illustration: "Анимирана илустрација",
+    illustration_theme: "Тема илустрације",
+    theme_auto: "Аутоматски (сунце или тамна тема)",
+    theme_day: "Дан",
+    theme_night: "Ноћ",
   },
   "sr-Latn": {
     title_default: "Berza",
@@ -369,6 +396,11 @@ const STRINGS = {
     no_rate: "nema kursa za {to}",
     language: "Jezik",
     lang_auto: "Automatski",
+    illustration: "Animirana ilustracija",
+    illustration_theme: "Tema ilustracije",
+    theme_auto: "Automatski (sunce ili tamna tema)",
+    theme_day: "Dan",
+    theme_night: "Noć",
   },
   it: {
     title_default: "Borsa",
@@ -426,6 +458,11 @@ const STRINGS = {
     no_rate: "nessun tasso verso {to}",
     language: "Lingua",
     lang_auto: "Automatica",
+    illustration: "Illustrazione animata",
+    illustration_theme: "Tema dell’illustrazione",
+    theme_auto: "Automatico (sole o tema scuro)",
+    theme_day: "Giorno",
+    theme_night: "Notte",
   },
   nl: {
     title_default: "Beurs",
@@ -483,6 +520,11 @@ const STRINGS = {
     no_rate: "geen koers naar {to}",
     language: "Taal",
     lang_auto: "Automatisch",
+    illustration: "Geanimeerde illustratie",
+    illustration_theme: "Thema van de illustratie",
+    theme_auto: "Automatisch (zon of donker thema)",
+    theme_day: "Dag",
+    theme_night: "Nacht",
   },
   pt: {
     title_default: "Bolsa",
@@ -540,6 +582,11 @@ const STRINGS = {
     no_rate: "sem taxa para {to}",
     language: "Idioma",
     lang_auto: "Automático",
+    illustration: "Ilustração animada",
+    illustration_theme: "Tema da ilustração",
+    theme_auto: "Automático (sol ou tema escuro)",
+    theme_day: "Dia",
+    theme_night: "Noite",
   },
   pl: {
     title_default: "Giełda",
@@ -599,6 +646,11 @@ const STRINGS = {
     no_rate: "brak kursu do {to}",
     language: "Język",
     lang_auto: "Automatycznie",
+    illustration: "Animowana ilustracja",
+    illustration_theme: "Motyw ilustracji",
+    theme_auto: "Automatycznie (słońce lub ciemny motyw)",
+    theme_day: "Dzień",
+    theme_night: "Noc",
   },
   ro: {
     title_default: "Bursă",
@@ -657,6 +709,11 @@ const STRINGS = {
     no_rate: "niciun curs către {to}",
     language: "Limbă",
     lang_auto: "Automat",
+    illustration: "Ilustrație animată",
+    illustration_theme: "Tema ilustrației",
+    theme_auto: "Automat (soare sau temă întunecată)",
+    theme_day: "Zi",
+    theme_night: "Noapte",
   },
   da: {
     title_default: "Børs",
@@ -714,6 +771,11 @@ const STRINGS = {
     no_rate: "ingen kurs til {to}",
     language: "Sprog",
     lang_auto: "Automatisk",
+    illustration: "Animeret illustration",
+    illustration_theme: "Illustrationens tema",
+    theme_auto: "Automatisk (sol eller mørkt tema)",
+    theme_day: "Dag",
+    theme_night: "Nat",
   },
   sv: {
     title_default: "Börs",
@@ -771,6 +833,11 @@ const STRINGS = {
     no_rate: "ingen kurs till {to}",
     language: "Språk",
     lang_auto: "Automatiskt",
+    illustration: "Animerad illustration",
+    illustration_theme: "Illustrationens tema",
+    theme_auto: "Automatiskt (sol eller mörkt tema)",
+    theme_day: "Dag",
+    theme_night: "Natt",
   },
   bg: {
     title_default: "Борса",
@@ -828,6 +895,11 @@ const STRINGS = {
     no_rate: "няма курс към {to}",
     language: "Език",
     lang_auto: "Автоматично",
+    illustration: "Анимирана илюстрация",
+    illustration_theme: "Тема на илюстрацията",
+    theme_auto: "Автоматично (слънце или тъмна тема)",
+    theme_day: "Ден",
+    theme_night: "Нощ",
   },
   ru: {
     title_default: "Биржа",
@@ -887,6 +959,11 @@ const STRINGS = {
     no_rate: "нет курса к {to}",
     language: "Язык",
     lang_auto: "Автоматически",
+    illustration: "Анимированная иллюстрация",
+    illustration_theme: "Тема иллюстрации",
+    theme_auto: "Автоматически (солнце или тёмная тема)",
+    theme_day: "День",
+    theme_night: "Ночь",
   },
   uk: {
     title_default: "Біржа",
@@ -946,6 +1023,11 @@ const STRINGS = {
     no_rate: "немає курсу до {to}",
     language: "Мова",
     lang_auto: "Автоматично",
+    illustration: "Анімована ілюстрація",
+    illustration_theme: "Тема ілюстрації",
+    theme_auto: "Автоматично (сонце або темна тема)",
+    theme_day: "День",
+    theme_night: "Ніч",
   },
   hu: {
     title_default: "Tőzsde",
@@ -1003,6 +1085,11 @@ const STRINGS = {
     no_rate: "nincs árfolyam erre: {to}",
     language: "Nyelv",
     lang_auto: "Automatikus",
+    illustration: "Animált illusztráció",
+    illustration_theme: "Az illusztráció témája",
+    theme_auto: "Automatikus (nap vagy sötét téma)",
+    theme_day: "Nappal",
+    theme_night: "Éjszaka",
   },
   sk: {
     title_default: "Burza",
@@ -1061,6 +1148,11 @@ const STRINGS = {
     no_rate: "žiadny kurz na {to}",
     language: "Jazyk",
     lang_auto: "Automaticky",
+    illustration: "Animovaná ilustrácia",
+    illustration_theme: "Téma ilustrácie",
+    theme_auto: "Automaticky (slnko alebo tmavá téma)",
+    theme_day: "Deň",
+    theme_night: "Noc",
   },
   cs: {
     title_default: "Burza",
@@ -1119,6 +1211,11 @@ const STRINGS = {
     no_rate: "žádný kurz na {to}",
     language: "Jazyk",
     lang_auto: "Automaticky",
+    illustration: "Animovaná ilustrace",
+    illustration_theme: "Motiv ilustrace",
+    theme_auto: "Automaticky (slunce nebo tmavý motiv)",
+    theme_day: "Den",
+    theme_night: "Noc",
   },
   sl: {
     title_default: "Borza",
@@ -1178,6 +1275,11 @@ const STRINGS = {
     no_rate: "ni tečaja v {to}",
     language: "Jezik",
     lang_auto: "Samodejno",
+    illustration: "Animirana ilustracija",
+    illustration_theme: "Tema ilustracije",
+    theme_auto: "Samodejno (sonce ali temna tema)",
+    theme_day: "Dan",
+    theme_night: "Noč",
   },
   lv: {
     title_default: "Birža",
@@ -1236,6 +1338,11 @@ const STRINGS = {
     no_rate: "nav kursa uz {to}",
     language: "Valoda",
     lang_auto: "Automātiski",
+    illustration: "Animēta ilustrācija",
+    illustration_theme: "Ilustrācijas motīvs",
+    theme_auto: "Automātiski (saule vai tumšais motīvs)",
+    theme_day: "Diena",
+    theme_night: "Nakts",
   },
   el: {
     title_default: "Χρηματιστήριο",
@@ -1293,6 +1400,11 @@ const STRINGS = {
     no_rate: "καμία ισοτιμία προς {to}",
     language: "Γλώσσα",
     lang_auto: "Αυτόματη",
+    illustration: "Κινούμενη εικονογράφηση",
+    illustration_theme: "Θέμα εικονογράφησης",
+    theme_auto: "Αυτόματο (ήλιος ή σκούρο θέμα)",
+    theme_day: "Ημέρα",
+    theme_night: "Νύχτα",
   },
 };
 
@@ -1739,6 +1851,90 @@ function spark(points, end, window, step, cls = "spark") {
 }
 
 // ---------------------------------------------------------------------------
+// The illustration: a stock-exchange screen at the right of a 200 × 80 banner picture (x 80–200; the left is open
+// sky for the card's text): a candlestick chart over a grid, its trend line, and a ticker tape scrolling the card's
+// own quotes. Above a 10 px ticker strip, edge to edge, in the colour of the day (green up, red down, grey closed).
+// ---------------------------------------------------------------------------
+
+// Candles [x, open, close, high, low] of a rising session; a falling one is the same chart flipped.
+const ST_CANDLES = [
+  [96, 40, 30, 46, 26],
+  [106, 36, 28, 44, 24],
+  [116, 34, 40, 46, 30],
+  [126, 38, 30, 42, 26],
+  [136, 30, 24, 36, 20],
+  [146, 26, 32, 34, 22],
+  [156, 30, 22, 34, 18],
+  [166, 22, 18, 28, 14],
+  [176, 20, 26, 30, 16],
+  [186, 24, 16, 28, 12],
+];
+// Ticker items when the card has no quote with a change to show.
+const ST_TAPE_FALLBACK = [
+  ["AAPL", "+1.3%", "up"],
+  ["MSFT", "-0.7%", "down"],
+  ["NVDA", "+3.0%", "up"],
+];
+// Width of a monospace glyph at the tape's font size (6.4), and the tape's speed (picture units per second).
+const ST_GLYPH = 3.85;
+const ST_TAPE_SPEED = 20;
+
+// Night picture: forced by illustration_theme, else the sun below the horizon or Home Assistant's dark theme (dark mode alone without a usable sun).
+const stIsNight = (hass, config) => {
+  if (config?.illustration_theme === "night") return true;
+  if (config?.illustration_theme === "day") return false;
+  const sun = hass?.states?.["sun.sun"];
+  if (sun && !["unknown", "unavailable", ""].includes(String(sun.state))) return sun.state === "below_horizon" || !!hass?.themes?.darkMode;
+  return !!hass?.themes?.darkMode;
+};
+
+// The banner picture. `state` is up | down | flat | closed (the closed market keeps the direction of its last
+// session in `dir`), `tape` the ticker items [label, change, trend], `closedText` the pill of a closed market.
+// `uid` keeps each card's clip path apart on a page with several cards.
+function stSceneSvg(uid, { state, dir, tape, closedText }) {
+  const up = dir !== "down";
+  const candles = ST_CANDLES.map(([x, o, c, h, l]) => (up ? [x, o, c, h, l] : [x, 72 - o, 72 - c, 72 - l, 72 - h]));
+  const bars = candles
+    .map(([x, o, c, h, l]) => {
+      const cls = c < o ? "st-cu" : "st-cd";
+      return `<line class="${cls}" x1="${x}" y1="${Math.min(h, l)}" x2="${x}" y2="${Math.max(h, l)}"/><rect class="${cls}" x="${x - 3}" y="${Math.min(o, c)}" width="6" height="${Math.max(2, Math.abs(o - c))}"/>`;
+    })
+    .join("");
+  const trendD = `M92 ${up ? 50 : 22} ${candles.map(([x, o, c]) => `L${x} ${(o + c) / 2}`).join(" ")}`;
+  // The tape: the items laid end to end (repeated to fill the 120-unit screen), twice, scrolled by one length.
+  let items = tape.length ? tape : ST_TAPE_FALLBACK;
+  const widthOf = (list) => list.reduce((w, [s, v]) => w + (s.length + v.length + 1) * ST_GLYPH + 8, 0);
+  while (widthOf(items) < 130) items = [...items, ...(tape.length ? tape : ST_TAPE_FALLBACK)];
+  const len = Math.round(widthOf(items));
+  let x = 84;
+  const run = [0, 1]
+    .map(() =>
+      items
+        .map(([s, v, t]) => {
+          const at = x;
+          x += (s.length + v.length + 1) * ST_GLYPH + 8;
+          return `<text x="${at.toFixed(1)}" y="75">${esc(s)} <tspan class="st-t${t === "down" ? "d" : t === "up" ? "u" : "f"}">${esc(v)}</tspan></text>`;
+        })
+        .join(""),
+    )
+    .join("");
+  const pillW = Math.round(closedText.length * 3.5 + 12);
+  const pill =
+    state === "closed"
+      ? `<g class="st-pill"><rect x="88" y="3" width="${pillW}" height="11" rx="5.5"/><text x="${88 + pillW / 2}" y="10.6" text-anchor="middle">${esc(closedText.toUpperCase())}</text></g>`
+      : "";
+  return `<svg class="st-scene" viewBox="0 0 200 80" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+    <defs><clipPath id="st-tape-${uid}"><rect x="80" y="64" width="120" height="16"/></clipPath></defs>
+    <g class="st-grid">${[14, 28, 42, 56].map((y) => `<line x1="86" y1="${y}" x2="200" y2="${y}"/>`).join("")}</g>
+    ${bars}
+    <path class="st-trend" d="${trendD}"/>
+    <rect class="st-tapebg" x="80" y="64" width="120" height="16"/>
+    <g clip-path="url(#st-tape-${uid})"><g class="st-tape" style="--st-len:-${len}px;--st-dur:${(len / ST_TAPE_SPEED).toFixed(1)}s">${run}</g></g>
+    ${pill}
+  </svg>`;
+}
+
+// ---------------------------------------------------------------------------
 // Styles
 // ---------------------------------------------------------------------------
 
@@ -1746,7 +1942,7 @@ const BASE_STYLE = `
   :host { --st-up: var(--success-color, #43a047); --st-down: var(--error-color, #db4437); --st-warn: var(--warning-color, #ffa600);
           --st-idle: var(--disabled-text-color, #9e9e9e); --st-accent: #6d5dfc; }
   :host { display: block; }
-  ha-card { overflow: hidden; container-type: inline-size; }
+  ha-card { overflow: hidden; container: st-card / inline-size; }
   /* A size container has no content width: this empty grid gives the card a natural width of 300 px with no minimum,
      so it still shrinks to its track in a "1fr" grid column or a flex row (as in the other ha-* cards). */
   :host::before { content: ""; display: grid; grid-template-columns: minmax(0, 300px); height: 0; }
@@ -1754,7 +1950,7 @@ const BASE_STYLE = `
   .muted { color: var(--secondary-text-color); }
   .clickable { cursor: pointer; }
   [role="button"]:focus-visible { outline: 2px solid var(--primary-color, #03a9f4); outline-offset: 2px; }
-  .up { --c: var(--st-up); } .down { --c: var(--st-down); } .flat, .idle { --c: var(--st-idle); }
+  .up { --c: var(--st-up); } .down { --c: var(--st-down); } .flat, .idle, .closed { --c: var(--st-idle); }
   .ok { --c: var(--st-up); } .warn { --c: var(--st-warn); }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c, var(--st-up)); flex: none; display: inline-block; }
   .chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 12px; font-size: 11px; font-weight: 500;
@@ -1763,19 +1959,31 @@ const BASE_STYLE = `
   /* Tinted round icon, in the colour of the day's trend; it opens Yahoo Finance (or the url option). */
   .logo { height: 40px; width: 40px; flex: none; border-radius: 50%; display: grid; place-items: center;
           color: var(--c, var(--st-accent)); background: color-mix(in srgb, var(--c, var(--st-accent)) 16%, transparent); }
-  .logo.idle, .logo.flat { --c: var(--st-accent); }
+  /* Grey when nothing moves (flat day, no change known) or the market is closed. */
+  .logo.idle, .logo.flat, .logo.closed { --c: var(--st-idle); }
   .logo .icon { width: 24px; height: 24px; }
-  .titles { flex: 1 1 0; min-width: 5ch; }
-  :host([hide-title]) .titles > .name, :host([hide-subtitle]) .titles > .sub { display: none; }
-  .header .chip { flex: 0 1 auto; min-width: 0; overflow: hidden; line-height: 16px; box-sizing: border-box; }
-  .header .chip.idle { color: var(--primary-text-color); }
-  .chip-label { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .header:has(.sub) .titles { align-self: flex-start; }
-  .header:has(.sub) .chip { align-self: flex-start; margin-top: 1px; }
-  @container (max-width: 239px) {
-    .header { gap: 6px; }
-    .header .chip { flex: none; padding: 6px; }
-    .header .chip .chip-label { display: none; }
+  .titles { flex: 1 1 0; min-width: 5ch; display: flex; flex-direction: column; }
+  :host([hide-title]) .titles .name, :host([hide-subtitle]) .titles .sub { display: none; }
+  .header .chip { line-height: 16px; box-sizing: border-box; }
+  .header .chip.idle, .header .chip.flat, .header .chip.closed { color: var(--primary-text-color); }
+  .chip-label { white-space: nowrap; }
+  /* The status pill (classic header and banner): on the title row, 8 px after the title, only when the whole title
+     and the pill's whole label fit there; otherwise on its own line under the subtitle, which then keeps one line.
+     Its dot alone at 200 px or less, or when the banner has no room left for its label (pill-dot): the label stays
+     in its title and for screen readers. Measured after each render (_fitPill), in every language, never by a fixed
+     width. */
+  .trow { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .trow .name { flex: 0 1 auto; min-width: 0; }
+  .trow .chip { flex: none; }
+  .titles.pill-below .trow { display: contents; }
+  .titles.pill-below .sub { order: 1; }
+  .titles.pill-below .chip { order: 2; align-self: flex-start; margin-top: 2px; }
+  .titles.pill-dot .chip { padding: 4px; }
+  .titles.pill-dot .chip .chip-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  @container (max-width: 239px) { .header { gap: 6px; } }
+  @container st-card (max-width: 200px) {
+    .titles .chip { padding: 4px; }
+    .titles .chip .chip-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   }
   .name { font-size: 16px; font-weight: 500; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sub { font-size: 12px; color: var(--secondary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -1793,6 +2001,56 @@ const BASE_STYLE = `
   .tick-up-0, .tick-down-0 { animation: tick0 1.2s ease-out; } .tick-up-1, .tick-down-1 { animation: tick1 1.2s ease-out; }
   @keyframes tick0 { from { background: color-mix(in srgb, var(--f) 28%, transparent); } to { background: transparent; } }
   @keyframes tick1 { from { background: color-mix(in srgb, var(--f) 28%, transparent); } to { background: transparent; } }
+`;
+
+// The illustrated header ("banner"): 90 px on both cards, the text on the sky at the left, the stock-exchange
+// screen at the right, the ticker strip edge to edge at the bottom. Day and night colours.
+const BANNER_STYLE = `
+  .banner { position: relative; overflow: hidden; height: 90px; color: #1b2430;
+            background: linear-gradient(90deg, #f8fafc 0%, #f3f6fa 45%, #edf2f8 100%); }
+  .banner.night { color: #fff; background: linear-gradient(90deg, #182134 0%, #121a29 45%, #0f1420 100%); }
+  .st-scene { position: absolute; right: 0; bottom: 10px; width: 200px; height: 80px; overflow: hidden; }
+  .st-ground { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background-size: 100% 3px; background-repeat: no-repeat;
+               background-position: 0 60%; }
+  .g-tick { background-color: #1f2633; background-image: repeating-linear-gradient(90deg, #8a95a5 0 3px, transparent 3px 9px); box-shadow: inset 0 2px 0 #39445a; }
+  .g-tickup { background-color: #123a26; background-image: repeating-linear-gradient(90deg, #43d17a 0 3px, transparent 3px 9px); box-shadow: inset 0 2px 0 #43a047; }
+  .g-tickdown { background-color: #3e1518; background-image: repeating-linear-gradient(90deg, #ff6b6f 0 3px, transparent 3px 9px); box-shadow: inset 0 2px 0 #e5484d; }
+  .night .g-tick { background-color: #141a24; box-shadow: inset 0 2px 0 #2c3546; }
+  .night .g-tickup { background-color: #0b2618; box-shadow: inset 0 2px 0 #2f8a45; }
+  .night .g-tickdown { background-color: #2a0e10; box-shadow: inset 0 2px 0 #b8383c; }
+  .st-grid line { stroke: #dfe6ef; stroke-width: .6; } .night .st-grid line { stroke: #1e2a3c; }
+  line.st-cu { stroke: #43a047; } line.st-cd { stroke: #e5484d; } rect.st-cu { fill: #43a047; } rect.st-cd { fill: #e5484d; }
+  .st-trend { fill: none; stroke: #2f80ed; stroke-width: 1.4; stroke-dasharray: 200; animation: st-trend 4s ease-out infinite; }
+  .st-dir-down .st-trend { stroke: #d68f00; }
+  .st-tapebg { fill: #1f2329; } .night .st-tapebg { fill: #05070b; }
+  .st-tape { font: 6.4px monospace; fill: #e6e9ee; animation: st-tape var(--st-dur, 12s) linear infinite; }
+  .st-tu { fill: #43c463; } .st-td { fill: #ff6b6b; } .st-tf { fill: #aab2bd; }
+  .st-pill rect { fill: #9aa3ae; } .st-pill text { font: 700 6px sans-serif; fill: #fff; }
+  .st-closed .st-tape, .st-closed .st-trend { animation: none; }
+  @keyframes st-tape { to { transform: translateX(var(--st-len, -240px)); } }
+  @keyframes st-trend { from { stroke-dashoffset: 200; } to { stroke-dashoffset: 0; } }
+  .htext { position: absolute; left: 12px; top: 6px; bottom: 16px; right: 126px; display: flex; align-items: center; gap: 10px; min-width: 0; }
+  /* Title row: the title, then the status pill 8 px after it (in the icon's colour, see .trow); the subtitle under. */
+  .htext .titles { flex: 1 1 auto; min-width: 0; justify-content: center; gap: 3px; }
+  .htext .name { font-weight: 600; }
+  .banner .chip { box-sizing: border-box; line-height: 16px;
+                  background: color-mix(in srgb, var(--c) 18%, rgba(255,255,255,.78)); color: color-mix(in srgb, var(--c) 45%, #0d2a45); }
+  .banner.night .chip { background: color-mix(in srgb, var(--c) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--c) 35%, #ffffff); }
+  .banner .chip .dot { width: 7px; height: 7px; }
+  .htext .sub { color: #5c6470; min-width: 0; }
+  .night .htext .sub { color: rgba(255,255,255,.75); }
+  .banner .logo { position: relative; background: rgba(255,255,255,.72); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 22%, transparent); }
+  .banner.night .logo { color: color-mix(in srgb, var(--c) 78%, #fff); background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+  /* The expand / collapse button: 24 px, round, frosted, in the banner's top right corner. */
+  .banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; width: 24px; height: 24px; margin: 0; color: #33506b;
+                  background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);
+                  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .banner .zoom:hover { background: rgba(255,255,255,.75); color: #33506b; }
+  .banner.night .zoom { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
+  .banner.night .zoom:hover { background: rgba(255,255,255,.22); color: #fff; }
+  /* Narrow card: no room for the screen beside the text, the sky and the strip stay. */
+  .banner + .content { padding-top: 12px; }
+  @container (max-width: 259px) { .st-scene { display: none; } .htext { right: 12px; } :host([mini]) .htext { right: 36px; } }
 `;
 
 // Appended last to every card style: with "reduce motion" set, nothing animates.
@@ -1868,11 +2126,20 @@ const MINI_STYLE = `
 // Cards
 // ---------------------------------------------------------------------------
 
+// Instance counter: unique SVG ids for each card on a page.
+let stUid = 0;
+
+// The banner's ground strip (the ticker strip), that the title block keeps clear of, and the gap between the title
+// and the status pill on its row (.trow).
+const PILL_GROUND_PX = 10;
+const PILL_GAP_PX = 8;
+
 class StockCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
     this._html = "";
+    this._uid = ++stUid;
     this._prices = {};
     this._ticks = {};
     this.shadowRoot.addEventListener("click", (ev) => this._onClick(ev));
@@ -1945,7 +2212,8 @@ class StockCard extends HTMLElement {
   // What the render depends on: registries, language and the states of the quotes.
   _signature() {
     const h = this._hass;
-    const sig = [h.entities, h.language, h.locale?.language];
+    // sun.sun and the dark mode pick the illustration's day or night picture.
+    const sig = [h.entities, h.language, h.locale?.language, h.states["sun.sun"], h.themes?.darkMode];
     for (const c of quoteConfigs(h, this._config)) sig.push(h.states[c.entity]);
     // The exchange rates of a total converted to `currency`.
     for (const id of rateEntities(h, this._config)) sig.push(h.states[id]);
@@ -1960,6 +2228,61 @@ class StockCard extends HTMLElement {
       this._html = html;
       morph(this.shadowRoot, html);
     }
+    this._fitPill();
+  }
+
+  connectedCallback() {
+    this._watchPill();
+  }
+
+  disconnectedCallback() {
+    this._unwatchPill();
+  }
+  // The status pill goes on the title row, right after the title, only when the whole title and the pill's whole
+  // label fit there; otherwise it takes its own line under the subtitle (the subtitle then on one line). In the
+  // banner, when title, subtitle and pill still do not fit above the ground strip (or the pill's label runs past the
+  // text, over the picture), the pill keeps its dot only.
+  // Measured after each render and on every new width (or once the web font is loaded), never by a fixed width.
+  _fitPill() {
+    for (const t of this.shadowRoot?.querySelectorAll?.(".titles") || []) {
+      const row = t.querySelector?.(".trow");
+      const name = row?.querySelector(".name");
+      const chips = row ? [...row.children].filter((n) => n.classList.contains("chip")) : [];
+      if (!name?.getBoundingClientRect || !chips.length) continue;
+      t.classList.remove("pill-below", "pill-dot");
+      // The title's whole width (scrollWidth is rounded: 1 px more, so that a title that fits is never cut).
+      const need = chips.reduce((w, c) => w + PILL_GAP_PX + c.getBoundingClientRect().width, name.scrollWidth + 1);
+      if (need <= row.getBoundingClientRect().width + 0.5) continue;
+      t.classList.add("pill-below");
+      const banner = t.closest(".banner");
+      if (!banner) continue;
+      const box = banner.getBoundingClientRect();
+      const ground = box.bottom - PILL_GROUND_PX;
+      const right = t.getBoundingClientRect().right;
+      const out = [name, ...t.querySelectorAll(".sub"), ...chips].some((n) => {
+        const r = n.getBoundingClientRect();
+        return r.height > 0 && (r.top < box.top - 0.5 || r.bottom > ground + 0.5 || r.right > right + 0.5);
+      });
+      if (out) t.classList.add("pill-dot");
+    }
+  }
+
+  _watchPill() {
+    if (typeof ResizeObserver !== "function") return;
+    this._pillResize ??= new ResizeObserver((entries) => {
+      const w = Math.round(entries.at(-1).contentRect.width);
+      if (w === this._pillWidth) return;
+      this._pillWidth = w;
+      cancelAnimationFrame(this._pillFrame);
+      this._pillFrame = requestAnimationFrame(() => this._fitPill());
+    });
+    this._pillResize.observe(this);
+    document.fonts?.ready?.then(() => this._fitPill());
+  }
+
+  _unwatchPill() {
+    this._pillResize?.disconnect();
+    this._pillWidth = null;
   }
 
   _onClick(ev) {
@@ -2053,30 +2376,67 @@ class StockCard extends HTMLElement {
   _header(quotes, tots) {
     const c = this._config;
     const n = quotes.length;
-    const market = c.show_market_state !== false ? marketOf(quotes) : null;
-    // Icon tinted by the day's move of the portfolio, else of the quotes on average.
+    const known = marketOf(quotes);
+    const market = c.show_market_state !== false ? known : null;
+    // The day's move of the portfolio, else of the quotes on average.
     const pcts = quotes.map((q) => q.pct).filter((v) => v !== null);
     const dayTrend = tots.length === 1 && tots[0].pct !== null ? trend(tots[0].pct) : pcts.length ? trend(pcts.reduce((a, b) => a + b, 0)) : "idle";
+    // Status: the market closed, else the day's trend. It colours the icon, the strip and the scene.
+    const status = known?.state === "closed" ? "closed" : dayTrend === "idle" ? "flat" : dayTrend;
     const sub = [`${n} ${tn(this._hass, c, "quotes_lc", n)}`];
     if (quotes.some((q) => q.yahoo)) sub.push("Yahoo Finance");
-    const chipCls = { open: "ok", pre: "warn", post: "warn", closed: "idle" }[market?.state];
-    const chipText = market ? esc(this._t(`market_${market.state}`)) : "";
-    return `
+    // The status pill, in the icon's colour: the market's state, else (no market sensor, or hidden) the day's move.
+    const dayPct = tots.length === 1 && tots[0].pct !== null ? tots[0].pct : pcts.length ? pcts.reduce((a, b) => a + b, 0) / pcts.length : null;
+    const chipText = market ? esc(this._t(`market_${market.state}`)) : dayPct === null ? "" : esc(fmtPct(dayPct, this._loc()));
+    const chipEntity = market ? ` clickable" role="button" tabindex="0" data-entity="${esc(market.id)}"` : '"';
+    const title = esc(c.title || this._t("title_default"));
+    const logo = `<a class="logo ${status}" href="${esc(this._logoUrl())}" target="_blank" rel="noopener noreferrer" title="${title}" aria-label="${title}">${svgIcon(ICONS[status] || ICONS.flat)}</a>`;
+    const chip = chipText
+      ? `<span class="chip ${status}${chipEntity} title="${chipText}" aria-label="${chipText}"><span class="dot"></span><span class="chip-label">${chipText}</span></span>`
+      : "";
+    const subText = `<div class="sub" title="${esc(sub.join(" · "))}">${esc(sub.join(" · "))}</div>`;
+    if (c.illustration === false)
+      return `
       <div class="header">
-        <a class="logo ${dayTrend}" href="${esc(this._logoUrl())}" target="_blank" rel="noopener noreferrer" title="${esc(c.title || this._t("title_default"))}" aria-label="${esc(
-          c.title || this._t("title_default"),
-        )}">${svgIcon(ICONS.chart)}</a>
+        ${logo}
         <div class="titles">
-          <div class="name">${esc(c.title || this._t("title_default"))}</div>
-          <div class="sub">${esc(sub.join(" · "))}</div>
+          <div class="trow"><div class="name">${title}</div>${chip}</div>
+          ${subText}
         </div>
-        ${
-          market
-            ? `<span class="chip clickable ${chipCls}" role="button" tabindex="0" data-entity="${esc(market.id)}" title="${chipText}" aria-label="${chipText}"><span class="dot"></span><span class="chip-label">${chipText}</span></span>`
-            : ""
-        }
         ${this._zoomButton()}
       </div>`;
+    // The ticker tape scrolls the card's own quotes and their day change.
+    const loc = this._loc();
+    const tape = quotes
+      .filter((q) => !q.missing && (q.pct !== null || q.change !== null))
+      .slice(0, 12)
+      .map((q) => {
+        const label = String(q.symbol || q.name).slice(0, 10);
+        const v = q.pct !== null ? fmtPct(q.pct, loc) : fmtMoney(q.change, "", loc, { decimals: c.decimals, sign: true });
+        return [label, v.replace(/\s/g, ""), trend(q.change ?? q.pct)];
+      });
+    const dir = dayTrend === "down" ? "down" : "up";
+    const scene = stSceneSvg(this._uid, { state: status, dir, tape, closedText: this._t("market_closed") });
+    const night = stIsNight(this._hass, c) ? " night" : "";
+    const strip = status === "up" ? "g-tickup" : status === "down" ? "g-tickdown" : "g-tick";
+    return `
+      <div class="banner st-${status} st-dir-${dir}${night}">
+        ${scene}
+        <div class="st-ground ${strip}" aria-hidden="true"></div>
+        <div class="htext">
+          ${logo}
+          <div class="titles">
+            <div class="trow"><div class="name">${title}</div>${chip}</div>
+            ${subText}
+          </div>
+        </div>
+        ${this._zoomButton()}
+      </div>`;
+  }
+
+  // The illustration's styles, only when it is shown.
+  _bannerStyle() {
+    return this._config.illustration === false ? "" : BANNER_STYLE;
   }
 
   // Button at the far right of the header: only the mini card has one.
@@ -2187,7 +2547,7 @@ class StockCard extends HTMLElement {
     const quotes = this._quotes();
     if (!quotes.length) return this._error("no_entities");
     const tots = this._totals(quotes);
-    return `<style>${BASE_STYLE}${FULL_STYLE}${MOTION_STYLE}</style>
+    return `<style>${BASE_STYLE}${FULL_STYLE}${this._bannerStyle()}${MOTION_STYLE}</style>
       <ha-card>
         ${this._header(quotes, tots)}
         <div class="content">
@@ -2262,12 +2622,14 @@ class StockMiniCard extends StockCard {
   }
 
   connectedCallback() {
+    super.connectedCallback();
     this._unzoom.on();
     // Back on the page after leaving it: rendered again in the compact view.
     if (this._hass && this._config) this._update();
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     this._unzoom.off();
     // Left (another dashboard view, a conditional card hidden): back to the compact view.
     this._zoomed = false;
@@ -2343,7 +2705,7 @@ class StockMiniCard extends StockCard {
             )
             .join("")
         : "";
-    return `<style>${BASE_STYLE}${MINI_STYLE}${MOTION_STYLE}</style>
+    return `<style>${BASE_STYLE}${MINI_STYLE}${this._bannerStyle()}${MOTION_STYLE}</style>
       <ha-card>
         ${this._header(quotes, tots)}
         <div class="content">
@@ -2477,6 +2839,10 @@ class StockEditorBase extends HTMLElement {
           },
           ...(this.constructor.mini ? [{ name: "max_items", selector: { number: { min: 1, max: 20, step: 1, mode: "box" } } }] : []),
           { name: "decimals", selector: { number: { min: 0, max: 8, step: 1, mode: "box" } } },
+          {
+            name: "illustration_theme",
+            selector: { select: { mode: "dropdown", options: ["auto", "day", "night"].map((value) => ({ value, label: tr(`theme_${value}`) })) } },
+          },
         ],
       },
       { type: "grid", name: "", schema: this.constructor.toggles.map(([n]) => ({ name: n, selector: { boolean: {} } })) },
@@ -2489,7 +2855,7 @@ class StockEditorBase extends HTMLElement {
 
   // Defaults of the fields: left out of the saved YAML.
   _defaults() {
-    return { ...Object.fromEntries(this.constructor.toggles), history_period: "1d", sort_by: "none", change_display: "both", max_items: 5 };
+    return { ...Object.fromEntries(this.constructor.toggles), history_period: "1d", sort_by: "none", change_display: "both", max_items: 5, illustration_theme: "auto" };
   }
 
   // Form data: the configuration with defaults filled in, entities as ids, and the portfolio fields.
@@ -2583,6 +2949,7 @@ class StockCardEditor extends StockEditorBase {
 
   static get toggles() {
     return [
+      ["illustration", true],
       ["show_title", true],
       ["show_subtitle", true],
       ["show_name", true],

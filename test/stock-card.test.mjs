@@ -324,3 +324,65 @@ test("exchange_rates must be a mapping", () => {
   const el = new StockCard();
   assert.throws(() => el.setConfig({ exchange_rates: [1] }), /exchange_rates/);
 });
+
+test("illustrated header: status colours the icon and the strip, night follows sun.sun, illustration: false is classic", () => {
+  const states = base();
+  const up = make(StockCard, states, { entities: ["sensor.yahoofinance_aapl"] })._render();
+  assert.match(up, /class="banner st-up st-dir-up"/);
+  assert.match(up, /class="logo up"/);
+  assert.match(up, /st-ground g-tickup/);
+  assert.match(up, /class="st-tape"/);
+  const down = make(StockCard, states, { entities: ["sensor.yahoofinance_msft"] })._render();
+  assert.match(down, /class="logo down"/);
+  assert.match(down, /g-tickdown/);
+  const closedStates = { ...states, "sensor.yahoofinance_aapl": yahoo("sensor.yahoofinance_aapl", 200, 2, { marketState: "CLOSED" }) };
+  const closed = make(StockCard, closedStates, { entities: ["sensor.yahoofinance_aapl"] })._render();
+  assert.match(closed, /class="logo closed"/);
+  assert.match(closed, /g-tick"/);
+  assert.match(closed, /MARKET CLOSED/);
+  const night = make(StockCard, { ...states, "sun.sun": { state: "below_horizon", attributes: {} } }, { entities: ["sensor.yahoofinance_aapl"] });
+  assert.match(night._render(), /st-dir-up night"/);
+  night._config = { ...night._config, illustration_theme: "day" };
+  assert.doesNotMatch(night._render(), / night"/);
+  const classic = make(StockCard, states, { entities: ["sensor.yahoofinance_aapl"], illustration: false })._render();
+  assert.doesNotMatch(classic, /class="banner/);
+  assert.match(classic, /class="header"/);
+});
+
+test("illustrated header: the dark theme shows the night picture even while the sun is up; forced day/night win", () => {
+  const states = { ...base(), "sun.sun": { state: "above_horizon", attributes: {} } };
+  for (const Cls of [StockCard, StockMiniCard]) {
+    const card = (darkMode, extra = {}) => {
+      const el = make(Cls, states, { entities: ["sensor.yahoofinance_aapl"], ...extra });
+      el._hass = { ...el._hass, themes: { darkMode } };
+      return el._render();
+    };
+    assert.match(card(true), / night"/);
+    assert.doesNotMatch(card(false), / night"/);
+    assert.doesNotMatch(card(true, { illustration_theme: "day" }), / night"/);
+    assert.match(card(false, { illustration_theme: "night" }), / night"/);
+  }
+});
+
+test("illustrated header: each card instance has its own SVG ids", () => {
+  const a = make(StockCard, base(), {})._render();
+  const b = make(StockMiniCard, base(), {})._render();
+  const id = (h) => h.match(/id="(st-tape-\d+)"/)[1];
+  assert.notEqual(id(a), id(b));
+});
+
+test("illustrated header: the status pill right after the title, in the icon's colour; the zoom button in the corner", async () => {
+  const html = make(StockCard, base(), { entities: ["sensor.yahoofinance_aapl"] })._render();
+  assert.match(html, /<div class="trow"><div class="name">Stocks<\/div><span class="chip up clickable"[^>]*title="Pre-market"/);
+  assert.match(html, /<a class="logo up"/);
+  // No market sensor shown: the pill gives the day's move.
+  assert.match(make(StockCard, base(), { entities: ["sensor.yahoofinance_aapl"], show_market_state: false })._render(), /<span class="chip up" title="\+1\.01%"/);
+  const { readFileSync } = await import("node:fs");
+  const src = readFileSync(new URL("../src/stock-card.js", import.meta.url), "utf8");
+  // Its place (title row or under the subtitle) is measured (_fitPill), never by a fixed width; its dot at 200 px.
+  assert.match(src, /\.titles\.pill-below \.trow \{ display: contents; \}/);
+  assert.doesNotMatch(src, /st-titles/);
+  assert.match(src, /@container st-card \(max-width: 200px\) \{\s*\.titles \.chip \{ padding: 4px; \}\s*\.titles \.chip \.chip-label \{[^}]*clip-path: inset\(50%\)/);
+  const zoom = src.match(/\n {2}\.banner \.zoom \{([^}]*)\}/)[1];
+  for (const d of [/position: absolute/, /top: 5px/, /right: 5px/, /width: 24px/, /height: 24px/]) assert.match(zoom, d);
+});
