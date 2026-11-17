@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0 - 2026-11-17
+
+### Features
+- **Illustrated header** on both cards (90 px): a stock-exchange screen at the right — candlesticks with their trend line, a ticker tape scrolling the card's own quotes and their day change — over a 10 px ticker strip, edge to edge, green when the day is up, red when it is down, grey when the market is closed (the tape then stops and a "Market closed" pill shows). The title, the market status chip and the subtitle sit on the left.
+- The header icon follows the status: trending up in green, trending down in red, neutral in grey for a flat day or a closed market (also in the classic header).
+- **Night picture** after sunset (`sun.sun`), else with Home Assistant's dark mode; `illustration_theme: day | night` forces one. `illustration: false` keeps the classic header. Both options are in the visual editors, labelled in all 22 languages. Animations stop with "reduce motion".
+
 ## 1.1.1 - 2026-11-14
 
 ### Fixes

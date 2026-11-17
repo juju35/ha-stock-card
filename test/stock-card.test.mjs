@@ -324,3 +324,34 @@ test("exchange_rates must be a mapping", () => {
   const el = new StockCard();
   assert.throws(() => el.setConfig({ exchange_rates: [1] }), /exchange_rates/);
 });
+
+test("illustrated header: status colours the icon and the strip, night follows sun.sun, illustration: false is classic", () => {
+  const states = base();
+  const up = make(StockCard, states, { entities: ["sensor.yahoofinance_aapl"] })._render();
+  assert.match(up, /class="banner st-up st-dir-up"/);
+  assert.match(up, /class="logo up"/);
+  assert.match(up, /st-ground g-tickup/);
+  assert.match(up, /class="st-tape"/);
+  const down = make(StockCard, states, { entities: ["sensor.yahoofinance_msft"] })._render();
+  assert.match(down, /class="logo down"/);
+  assert.match(down, /g-tickdown/);
+  const closedStates = { ...states, "sensor.yahoofinance_aapl": yahoo("sensor.yahoofinance_aapl", 200, 2, { marketState: "CLOSED" }) };
+  const closed = make(StockCard, closedStates, { entities: ["sensor.yahoofinance_aapl"] })._render();
+  assert.match(closed, /class="logo closed"/);
+  assert.match(closed, /g-tick"/);
+  assert.match(closed, /MARKET CLOSED/);
+  const night = make(StockCard, { ...states, "sun.sun": { state: "below_horizon", attributes: {} } }, { entities: ["sensor.yahoofinance_aapl"] });
+  assert.match(night._render(), /st-dir-up night"/);
+  night._config = { ...night._config, illustration_theme: "day" };
+  assert.doesNotMatch(night._render(), / night"/);
+  const classic = make(StockCard, states, { entities: ["sensor.yahoofinance_aapl"], illustration: false })._render();
+  assert.doesNotMatch(classic, /class="banner/);
+  assert.match(classic, /class="header"/);
+});
+
+test("illustrated header: each card instance has its own SVG ids", () => {
+  const a = make(StockCard, base(), {})._render();
+  const b = make(StockMiniCard, base(), {})._render();
+  const id = (h) => h.match(/id="(st-tape-\d+)"/)[1];
+  assert.notEqual(id(a), id(b));
+});
