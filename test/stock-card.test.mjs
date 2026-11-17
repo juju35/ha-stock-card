@@ -373,14 +373,16 @@ test("illustrated header: each card instance has its own SVG ids", () => {
 
 test("illustrated header: the status pill right after the title, in the icon's colour; the zoom button in the corner", async () => {
   const html = make(StockCard, base(), { entities: ["sensor.yahoofinance_aapl"] })._render();
-  assert.match(html, /<div class="name">Stocks<\/div><span class="chip up clickable"[^>]*title="Pre-market"/);
+  assert.match(html, /<div class="trow"><div class="name">Stocks<\/div><span class="chip up clickable"[^>]*title="Pre-market"/);
   assert.match(html, /<a class="logo up"/);
   // No market sensor shown: the pill gives the day's move.
   assert.match(make(StockCard, base(), { entities: ["sensor.yahoofinance_aapl"], show_market_state: false })._render(), /<span class="chip up" title="\+1\.01%"/);
   const { readFileSync } = await import("node:fs");
   const src = readFileSync(new URL("../src/stock-card.js", import.meta.url), "utf8");
-  assert.match(src, /\.htext \.titles \{[^}]*display: grid;[^}]*grid-template-columns: minmax\(min\(4\.5ch, 100%\), max-content\) minmax\(0, max-content\); container: st-titles \/ inline-size;/);
-  assert.match(src, /@container st-card \(max-width: 200px\) \{\s*\.banner \.chip \{ padding: 4px; \}\s*\.banner \.chip \.chip-label \{[^}]*clip-path: inset\(50%\)/);
+  // Its place (title row or under the subtitle) is measured (_fitPill), never by a fixed width; its dot at 200 px.
+  assert.match(src, /\.titles\.pill-below \.trow \{ display: contents; \}/);
+  assert.doesNotMatch(src, /st-titles/);
+  assert.match(src, /@container st-card \(max-width: 200px\) \{\s*\.titles \.chip \{ padding: 4px; \}\s*\.titles \.chip \.chip-label \{[^}]*clip-path: inset\(50%\)/);
   const zoom = src.match(/\n {2}\.banner \.zoom \{([^}]*)\}/)[1];
   for (const d of [/position: absolute/, /top: 5px/, /right: 5px/, /width: 24px/, /height: 24px/]) assert.match(zoom, d);
 });
