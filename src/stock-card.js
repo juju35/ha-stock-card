@@ -1942,7 +1942,7 @@ const BASE_STYLE = `
   :host { --st-up: var(--success-color, #43a047); --st-down: var(--error-color, #db4437); --st-warn: var(--warning-color, #ffa600);
           --st-idle: var(--disabled-text-color, #9e9e9e); --st-accent: #6d5dfc; }
   :host { display: block; }
-  ha-card { overflow: hidden; container-type: inline-size; }
+  ha-card { overflow: hidden; container: st-card / inline-size; }
   /* A size container has no content width: this empty grid gives the card a natural width of 300 px with no minimum,
      so it still shrinks to its track in a "1fr" grid column or a flex row (as in the other ha-* cards). */
   :host::before { content: ""; display: grid; grid-template-columns: minmax(0, 300px); height: 0; }
@@ -1950,7 +1950,7 @@ const BASE_STYLE = `
   .muted { color: var(--secondary-text-color); }
   .clickable { cursor: pointer; }
   [role="button"]:focus-visible { outline: 2px solid var(--primary-color, #03a9f4); outline-offset: 2px; }
-  .up { --c: var(--st-up); } .down { --c: var(--st-down); } .flat, .idle { --c: var(--st-idle); }
+  .up { --c: var(--st-up); } .down { --c: var(--st-down); } .flat, .idle, .closed { --c: var(--st-idle); }
   .ok { --c: var(--st-up); } .warn { --c: var(--st-warn); }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c, var(--st-up)); flex: none; display: inline-block; }
   .chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 8px; border-radius: 12px; font-size: 11px; font-weight: 500;
@@ -1965,7 +1965,7 @@ const BASE_STYLE = `
   .titles { flex: 1 1 0; min-width: 5ch; }
   :host([hide-title]) .titles > .name, :host([hide-subtitle]) .titles .sub { display: none; }
   .header .chip { flex: 0 1 auto; min-width: 0; overflow: hidden; line-height: 16px; box-sizing: border-box; }
-  .header .chip.idle { color: var(--primary-text-color); }
+  .header .chip.idle, .header .chip.flat, .header .chip.closed { color: var(--primary-text-color); }
   .chip-label { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .header:has(.sub) .titles { align-self: flex-start; }
   .header:has(.sub) .chip { align-self: flex-start; margin-top: 1px; }
@@ -2019,19 +2019,34 @@ const BANNER_STYLE = `
   @keyframes st-tape { to { transform: translateX(var(--st-len, -240px)); } }
   @keyframes st-trend { from { stroke-dashoffset: 200; } to { stroke-dashoffset: 0; } }
   .htext { position: absolute; left: 12px; top: 6px; bottom: 16px; right: 126px; display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .htext .titles { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  /* Title row: the title, then the status pill 8 px after it (in the icon's colour), both shrinking (the title keeps a
+     few characters, the pill at most about half the row); the subtitle under them. Short of room the pill takes its
+     own line under the subtitle; on a very narrow card only its dot shows (its text stays in its title and for
+     screen readers). */
+  .htext .titles { flex: 1 1 auto; min-width: 0; display: grid; row-gap: 3px; column-gap: 8px; align-items: center; justify-content: start;
+                   grid-template-columns: minmax(min(4.5ch, 100%), max-content) minmax(0, max-content); container: st-titles / inline-size; }
+  .htext .titles > .sub { grid-column: 1 / -1; }
   .htext .name { font-weight: 600; }
-  .htext .meta { display: flex; align-items: center; gap: 6px; min-width: 0; }
-  .htext .meta .chip { flex: none; max-width: 100%; min-width: 0; overflow: hidden; line-height: 16px; background: rgba(255,255,255,.78); }
-  .htext .meta .chip.idle { color: #5c6470; }
-  .night .htext .meta .chip { background: rgba(255,255,255,.1); }
-  .night .htext .meta .chip.idle { color: #c3c9d2; }
+  .banner .chip { justify-self: start; max-width: 100%; min-width: 0; overflow: hidden; box-sizing: border-box; line-height: 16px;
+                  background: color-mix(in srgb, var(--c) 18%, rgba(255,255,255,.78)); color: color-mix(in srgb, var(--c) 45%, #0d2a45); }
+  .banner.night .chip { background: color-mix(in srgb, var(--c) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--c) 35%, #ffffff); }
+  .banner .chip .dot { width: 7px; height: 7px; }
+  @container st-titles (max-width: 180px) { .htext .titles > .chip { grid-column: 1 / -1; grid-row: 3; } }
+  @container st-card (max-width: 200px) {
+    .banner .chip { padding: 4px; }
+    .banner .chip .chip-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  }
   .htext .sub { color: #5c6470; min-width: 0; }
   .night .htext .sub { color: rgba(255,255,255,.75); }
   .banner .logo { position: relative; background: rgba(255,255,255,.72); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 22%, transparent); }
   .banner.night .logo { color: color-mix(in srgb, var(--c) 78%, #fff); background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
-  .banner .zoom { position: absolute; top: 6px; right: 6px; margin: 0; color: #1b2430; background: rgba(255,255,255,.6); }
-  .banner.night .zoom { color: #fff; background: rgba(10,16,28,.55); }
+  /* The expand / collapse button: 24 px, round, frosted, in the banner's top right corner. */
+  .banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; width: 24px; height: 24px; margin: 0; color: #33506b;
+                  background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);
+                  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .banner .zoom:hover { background: rgba(255,255,255,.75); color: #33506b; }
+  .banner.night .zoom { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
+  .banner.night .zoom:hover { background: rgba(255,255,255,.22); color: #fff; }
   /* Narrow card: no room for the screen beside the text, the sky and the strip stay. */
   .banner + .content { padding-top: 12px; }
   @container (max-width: 259px) { .st-scene { display: none; } .htext { right: 12px; } :host([mini]) .htext { right: 36px; } }
@@ -2309,12 +2324,14 @@ class StockCard extends HTMLElement {
     const status = known?.state === "closed" ? "closed" : dayTrend === "idle" ? "flat" : dayTrend;
     const sub = [`${n} ${tn(this._hass, c, "quotes_lc", n)}`];
     if (quotes.some((q) => q.yahoo)) sub.push("Yahoo Finance");
-    const chipCls = { open: "ok", pre: "warn", post: "warn", closed: "idle" }[market?.state];
-    const chipText = market ? esc(this._t(`market_${market.state}`)) : "";
+    // The status pill, in the icon's colour: the market's state, else (no market sensor, or hidden) the day's move.
+    const dayPct = tots.length === 1 && tots[0].pct !== null ? tots[0].pct : pcts.length ? pcts.reduce((a, b) => a + b, 0) / pcts.length : null;
+    const chipText = market ? esc(this._t(`market_${market.state}`)) : dayPct === null ? "" : esc(fmtPct(dayPct, this._loc()));
+    const chipEntity = market ? ` clickable" role="button" tabindex="0" data-entity="${esc(market.id)}"` : '"';
     const title = esc(c.title || this._t("title_default"));
     const logo = `<a class="logo ${status}" href="${esc(this._logoUrl())}" target="_blank" rel="noopener noreferrer" title="${title}" aria-label="${title}">${svgIcon(ICONS[status] || ICONS.flat)}</a>`;
-    const chip = market
-      ? `<span class="chip clickable ${chipCls}" role="button" tabindex="0" data-entity="${esc(market.id)}" title="${chipText}" aria-label="${chipText}"><span class="dot"></span><span class="chip-label">${chipText}</span></span>`
+    const chip = chipText
+      ? `<span class="chip ${status}${chipEntity} title="${chipText}" aria-label="${chipText}"><span class="dot"></span><span class="chip-label">${chipText}</span></span>`
       : "";
     const subText = `<div class="sub">${esc(sub.join(" · "))}</div>`;
     if (c.illustration === false)
@@ -2349,8 +2366,8 @@ class StockCard extends HTMLElement {
         <div class="htext">
           ${logo}
           <div class="titles">
-            <div class="name">${title}</div>
-            <div class="meta">${chip}${subText}</div>
+            <div class="name">${title}</div>${chip}
+            ${subText}
           </div>
         </div>
         ${this._zoomButton()}
