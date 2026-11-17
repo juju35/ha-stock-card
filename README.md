@@ -154,7 +154,7 @@ zoom: true
 | `entities[].purchase_price` | both | — | Price paid per share, in the quote's currency: adds the gain to the portfolio total |
 | `title` | both | `Stocks` (translated) | Card title |
 | `illustration` | both | `true` | Animated stock-exchange header (candlesticks, ticker tape, ticker strip in the colour of the day); `false` keeps the classic header |
-| `illustration_theme` | both | `auto` | Picture of the header: `auto` (night when `sun.sun` is below the horizon, else Home Assistant's dark mode), `day` or `night` |
+| `illustration_theme` | both | `auto` | Picture of the header: `auto` (night when `sun.sun` is below the horizon or with Home Assistant's dark theme, even while the sun is up), `day` or `night` |
 | `show_title` | both | `true` | Show the title in the header |
 | `show_subtitle` | both | `true` | Show the subtitle (number of quotes, source) under the title |
 | `url` | both | Yahoo Finance | Address opened in a new tab when clicking the header icon (http or https) |

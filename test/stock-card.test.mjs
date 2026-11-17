@@ -349,6 +349,21 @@ test("illustrated header: status colours the icon and the strip, night follows s
   assert.match(classic, /class="header"/);
 });
 
+test("illustrated header: the dark theme shows the night picture even while the sun is up; forced day/night win", () => {
+  const states = { ...base(), "sun.sun": { state: "above_horizon", attributes: {} } };
+  for (const Cls of [StockCard, StockMiniCard]) {
+    const card = (darkMode, extra = {}) => {
+      const el = make(Cls, states, { entities: ["sensor.yahoofinance_aapl"], ...extra });
+      el._hass = { ...el._hass, themes: { darkMode } };
+      return el._render();
+    };
+    assert.match(card(true), / night"/);
+    assert.doesNotMatch(card(false), / night"/);
+    assert.doesNotMatch(card(true, { illustration_theme: "day" }), / night"/);
+    assert.match(card(false, { illustration_theme: "night" }), / night"/);
+  }
+});
+
 test("illustrated header: each card instance has its own SVG ids", () => {
   const a = make(StockCard, base(), {})._render();
   const b = make(StockMiniCard, base(), {})._render();

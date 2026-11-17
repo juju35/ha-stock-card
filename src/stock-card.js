@@ -1879,12 +1879,12 @@ const ST_TAPE_FALLBACK = [
 const ST_GLYPH = 3.85;
 const ST_TAPE_SPEED = 20;
 
-// Night picture: forced by illustration_theme, else the sun below the horizon, else Home Assistant's dark mode.
+// Night picture: forced by illustration_theme, else the sun below the horizon or Home Assistant's dark theme (dark mode alone without a usable sun).
 const stIsNight = (hass, config) => {
   if (config?.illustration_theme === "night") return true;
   if (config?.illustration_theme === "day") return false;
   const sun = hass?.states?.["sun.sun"];
-  if (sun && !["unknown", "unavailable", ""].includes(String(sun.state))) return sun.state === "below_horizon";
+  if (sun && !["unknown", "unavailable", ""].includes(String(sun.state))) return sun.state === "below_horizon" || !!hass?.themes?.darkMode;
   return !!hass?.themes?.darkMode;
 };
 
