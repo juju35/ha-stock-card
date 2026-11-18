@@ -325,7 +325,7 @@ test("exchange_rates must be a mapping", () => {
   assert.throws(() => el.setConfig({ exchange_rates: [1] }), /exchange_rates/);
 });
 
-test("illustrated header: status colours the icon and the strip, night follows sun.sun, illustration: false is classic", () => {
+test("illustrated header: status colours the icon and the strip, night follows the dark theme alone, illustration: false is classic", () => {
   const states = base();
   const up = make(StockCard, states, { entities: ["sensor.yahoofinance_aapl"] })._render();
   assert.match(up, /class="banner st-up st-dir-up"/);
@@ -341,6 +341,9 @@ test("illustrated header: status colours the icon and the strip, night follows s
   assert.match(closed, /g-tick"/);
   assert.match(closed, /MARKET CLOSED/);
   const night = make(StockCard, { ...states, "sun.sun": { state: "below_horizon", attributes: {} } }, { entities: ["sensor.yahoofinance_aapl"] });
+  // A light theme keeps the day picture after sunset; the dark theme shows the night one.
+  assert.doesNotMatch(night._render(), / night"/);
+  night._hass = { ...night._hass, themes: { darkMode: true } };
   assert.match(night._render(), /st-dir-up night"/);
   night._config = { ...night._config, illustration_theme: "day" };
   assert.doesNotMatch(night._render(), / night"/);

@@ -32,7 +32,7 @@ Yahoo Finance sensors are **discovered automatically**: with no configuration, t
 ## Features
 
 - Two cards: a full **Stock Card** and a compact **Stock Mini Card**
-- Animated stock-exchange header on both cards: a candlestick chart with its trend line and a ticker tape scrolling your quotes, over a ticker strip green when the day is up, red when it is down, grey when the market is closed; the icon follows the same status, with a night picture after sunset
+- Animated stock-exchange header on both cards: a candlestick chart with its trend line and a ticker tape scrolling your quotes, over a ticker strip green when the day is up, red when it is down, grey when the market is closed; the icon follows the same status, the night picture with a dark theme, the day one with a light theme
 - Automatic discovery of the Yahoo Finance sensors, or your own list of quotes, mixing Yahoo Finance and any price sensor
 - Price in its currency, formatted for your language, and the change of the day in value and percentage, green or red
 - Sparkline of each quote over 24 hours, 5 days, 1 month, 3 months or 1 year, from the recorder's statistics (or the state history of a sensor without statistics), coloured by its own trend
@@ -154,7 +154,7 @@ zoom: true
 | `entities[].purchase_price` | both | — | Price paid per share, in the quote's currency: adds the gain to the portfolio total |
 | `title` | both | `Stocks` (translated) | Card title |
 | `illustration` | both | `true` | Animated stock-exchange header (candlesticks, ticker tape, ticker strip in the colour of the day); `false` keeps the classic header |
-| `illustration_theme` | both | `auto` | Picture of the header: `auto` (night when `sun.sun` is below the horizon or with Home Assistant's dark theme, even while the sun is up), `day` or `night` |
+| `illustration_theme` | both | `auto` | Picture of the header: `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
 | `show_title` | both | `true` | Show the title in the header |
 | `show_subtitle` | both | `true` | Show the subtitle (number of quotes, source) under the title |
 | `url` | both | Yahoo Finance | Address opened in a new tab when clicking the header icon (http or https) |

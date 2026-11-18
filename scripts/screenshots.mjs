@@ -88,7 +88,7 @@ const openCard = async (browser, s) => {
           })
         );
       };
-      // The dark theme shows the illustration's night picture (no sun.sun in the mock states).
+      // The dark theme shows the illustration's night picture.
       el.hass = { states, entities, devices: {}, language: "en", locale: { language: "en" }, themes: { darkMode: dark }, callService: () => {}, callWS };
       document.getElementById("root").appendChild(el);
       window.__card = el;
