@@ -1,4 +1,5 @@
-// Bundles src/stock-card.js into the single HACS file dist/stock-card.js.
+// Bundles src/stock-card.js into the single HACS file dist/stock-card.js, inlining the Yahoo Finance logo
+// (the badge on the header icon).
 // Usage: node scripts/build.mjs  (dist/ is not committed: CI and the release workflow build it)
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -8,7 +9,8 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const pkg = JSON.parse(readFileSync(`${root}package.json`, "utf8"));
 
 const out = readFileSync(`${root}src/stock-card.js`, "utf8")
-  .replace("__VERSION__", pkg.version);
+  .replace("__VERSION__", pkg.version)
+  .replace("__IMG_YAHOO__", `data:image/png;base64,${readFileSync(`${root}images/yahoofinance.png`).toString("base64")}`);
 
 const target = `${root}dist/stock-card.js`;
 mkdirSync(`${root}dist`, { recursive: true });

@@ -10,6 +10,8 @@
 
 const VERSION = "__VERSION__";
 const YAHOO_SITE = "https://finance.yahoo.com";
+// The Yahoo Finance logo, inlined by scripts/build.mjs: the badge on the header icon.
+const IMG_YAHOO = "__IMG_YAHOO__";
 
 const ICONS = {
   // mdi:trending-up, mdi:trending-down and mdi:trending-neutral: the header icon, after the day's status.
@@ -1960,6 +1962,12 @@ const BASE_STYLE = `
   /* Grey when nothing moves (flat day, no change known) or the market is closed. */
   .logo.idle, .logo.flat, .logo.closed { --c: var(--st-idle); }
   .logo .icon { width: 24px; height: 24px; }
+  /* The source's logo (Yahoo Finance) as a badge at the icon's bottom right, as on the other ha-* cards. */
+  .logo { position: relative; }
+  .logo .brand { position: absolute; right: -4px; bottom: -4px; width: 18px; height: 18px; border-radius: 5px; object-fit: contain;
+                 padding: 2px; box-sizing: border-box; background: #fff;
+                 box-shadow: 0 0 0 1px var(--divider-color, rgba(0,0,0,.12)), 0 0 0 3px var(--card-background-color, #fff); }
+  .banner .logo .brand { box-shadow: 0 0 0 1px rgba(13,42,69,.16), 0 1px 3px rgba(13,42,69,.18); }
   .titles { flex: 1 1 0; min-width: 5ch; display: flex; flex-direction: column; }
   :host([hide-title]) .titles .name, :host([hide-subtitle]) .titles .sub { display: none; }
   .header .chip { line-height: 16px; box-sizing: border-box; }
@@ -2383,13 +2391,14 @@ class StockCard extends HTMLElement {
     // Status: the market closed, else the day's trend. It colours the icon, the strip and the scene.
     const status = known?.state === "closed" ? "closed" : dayTrend === "idle" ? "flat" : dayTrend;
     const sub = [`${n} ${tn(this._hass, c, "quotes_lc", n)}`];
-    if (quotes.some((q) => q.yahoo)) sub.push("Yahoo Finance");
+    const yahoo = quotes.some((q) => q.yahoo);
+    if (yahoo) sub.push("Yahoo Finance");
     // The status pill, in the icon's colour: the market's state, else (no market sensor, or hidden) the day's move.
     const dayPct = tots.length === 1 && tots[0].pct !== null ? tots[0].pct : pcts.length ? pcts.reduce((a, b) => a + b, 0) / pcts.length : null;
     const chipText = market ? esc(this._t(`market_${market.state}`)) : dayPct === null ? "" : esc(fmtPct(dayPct, this._loc()));
     const chipEntity = market ? ` clickable" role="button" tabindex="0" data-entity="${esc(market.id)}"` : '"';
     const title = esc(c.title || this._t("title_default"));
-    const logo = `<a class="logo ${status}" href="${esc(this._logoUrl())}" target="_blank" rel="noopener noreferrer" title="${title}" aria-label="${title}">${svgIcon(ICONS[status] || ICONS.flat)}</a>`;
+    const logo = `<a class="logo ${status}" href="${esc(this._logoUrl())}" target="_blank" rel="noopener noreferrer" title="${title}" aria-label="${title}">${svgIcon(ICONS[status] || ICONS.flat)}${yahoo ? `<img class="brand" src="${IMG_YAHOO}" alt="Yahoo Finance">` : ""}</a>`;
     const chip = chipText
       ? `<span class="chip ${status}${chipEntity} title="${chipText}" aria-label="${chipText}"><span class="dot"></span><span class="chip-label">${chipText}</span></span>`
       : "";
