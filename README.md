@@ -1,7 +1,7 @@
 # ha-stock-card
 
 [![Marketplace](https://img.shields.io/badge/Marketplace-Custom-41BDF5.svg)](https://www.home-assistant.io/integrations/marketplace/)
-[![HACS Validation](https://github.com/juju35/ha-stock-card/actions/workflows/hacs.yml/badge.svg)](https://github.com/juju35/ha-stock-card/actions/workflows/hacs.yml)
+[![Marketplace Validation](https://github.com/juju35/ha-stock-card/actions/workflows/hacs.yml/badge.svg)](https://github.com/juju35/ha-stock-card/actions/workflows/hacs.yml)
 [![Validate](https://github.com/juju35/ha-stock-card/actions/workflows/validate.yml/badge.svg)](https://github.com/juju35/ha-stock-card/actions/workflows/validate.yml)
 [![Lint](https://github.com/juju35/ha-stock-card/actions/workflows/lint.yml/badge.svg)](https://github.com/juju35/ha-stock-card/actions/workflows/lint.yml)
 [![Release](https://img.shields.io/github/v/release/juju35/ha-stock-card)](https://github.com/juju35/ha-stock-card/releases/latest)
