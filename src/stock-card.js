@@ -2280,6 +2280,7 @@ class StockCard extends HTMLElement {
 
   _unwatchPill() {
     this._pillResize?.disconnect();
+    if (typeof cancelAnimationFrame === "function") cancelAnimationFrame(this._pillFrame);
     this._pillWidth = null;
   }
 
