@@ -1,6 +1,9 @@
 # Changelog
 
-## 1.2.2 - 2026-11-20
+## 1.3.0 - 2026-11-20
+
+### Features
+- The header icon carries the Yahoo Finance logo as a badge at its bottom right (classic and illustrated headers), as the other ha-* cards show their source, when a quote comes from Yahoo Finance.
 
 ### Fixes
 - The status pill's pending fit is dropped when the card leaves the page (another view, a conditional card hidden).

@@ -269,7 +269,7 @@ Market status, from the most active of the card's Yahoo Finance quotes:
 | `POST`, `POSTPOST` | After hours (orange) |
 | `CLOSED` | Market closed (grey) |
 
-The header icon is tinted by the day's move: of the portfolio total when there is one, else of the quotes on average.
+The header icon is tinted by the day's move: of the portfolio total when there is one, else of the quotes on average. When a quote comes from Yahoo Finance, the icon carries its logo as a badge.
 
 ## Development
 
