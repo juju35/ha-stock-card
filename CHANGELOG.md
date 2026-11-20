@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2 - 2026-11-20
+
+### Fixes
+- The status pill's pending fit is dropped when the card leaves the page (another view, a conditional card hidden).
+
 ## 1.2.1 - 2026-11-18
 
 ### Fixes
