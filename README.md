@@ -1,7 +1,7 @@
 # ha-stock-card
 
 [![Marketplace](https://img.shields.io/badge/Marketplace-Custom-41BDF5.svg)](https://www.home-assistant.io/integrations/marketplace/)
-[![HACS Validation](https://github.com/juju35/ha-stock-card/actions/workflows/hacs.yml/badge.svg)](https://github.com/juju35/ha-stock-card/actions/workflows/hacs.yml)
+[![Marketplace Validation](https://github.com/juju35/ha-stock-card/actions/workflows/hacs.yml/badge.svg)](https://github.com/juju35/ha-stock-card/actions/workflows/hacs.yml)
 [![Validate](https://github.com/juju35/ha-stock-card/actions/workflows/validate.yml/badge.svg)](https://github.com/juju35/ha-stock-card/actions/workflows/validate.yml)
 [![Lint](https://github.com/juju35/ha-stock-card/actions/workflows/lint.yml/badge.svg)](https://github.com/juju35/ha-stock-card/actions/workflows/lint.yml)
 [![Release](https://img.shields.io/github/v/release/juju35/ha-stock-card)](https://github.com/juju35/ha-stock-card/releases/latest)
@@ -269,7 +269,7 @@ Market status, from the most active of the card's Yahoo Finance quotes:
 | `POST`, `POSTPOST` | After hours (orange) |
 | `CLOSED` | Market closed (grey) |
 
-The header icon is tinted by the day's move: of the portfolio total when there is one, else of the quotes on average.
+The header icon is tinted by the day's move: of the portfolio total when there is one, else of the quotes on average. When a quote comes from Yahoo Finance, the icon carries its logo as a badge.
 
 ## Development
 

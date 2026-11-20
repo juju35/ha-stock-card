@@ -389,3 +389,12 @@ test("illustrated header: the status pill right after the title, in the icon's c
   const zoom = src.match(/\n {2}\.banner \.zoom \{([^}]*)\}/)[1];
   for (const d of [/position: absolute/, /top: 5px/, /right: 5px/, /width: 24px/, /height: 24px/]) assert.match(zoom, d);
 });
+
+test("header icon: the Yahoo Finance logo as a badge when a quote comes from Yahoo Finance, none otherwise", () => {
+  for (const illustration of [true, false]) {
+    const html = make(StockCard, base(), { entities: ["sensor.yahoofinance_aapl"], illustration })._render();
+    assert.match(html, /<a class="logo up"[^>]*><svg[^>]*>.*?<\/svg><img class="brand" src="[^"]+" alt="Yahoo Finance"><\/a>/);
+  }
+  const other = { ...base(), "sensor.btc": { state: "50000", attributes: { unit_of_measurement: "USD" } } };
+  assert.doesNotMatch(make(StockCard, other, { entities: ["sensor.btc"] })._render(), /class="brand"/);
+});
