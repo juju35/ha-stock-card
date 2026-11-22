@@ -2998,7 +2998,7 @@ for (const card of [
   { type: "stock-mini-card", name: "Stock Mini Card", description: "Compact stock quotes (Yahoo Finance or any price sensor) with the day's change." },
 ]) {
   if (!window.customCards.some((c) => c.type === card.type))
-    window.customCards.push({ ...card, preview: true, documentationURL: "https://github.com/juju35/ha-stock-card" });
+    window.customCards.push({ ...card, preview: false, documentationURL: "https://github.com/juju35/ha-stock-card" });
 }
 
 console.info(
