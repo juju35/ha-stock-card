@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { load } from "./load.mjs";
+import { source } from "./source.mjs";
 
 const { StockCard, StockMiniCard, quoteOf, quoteConfigs, totals, sortQuotes, marketOf, fmtMoney, fmtPct, spark, downsample, isYahoo, sameSig, trend, rateOf } = load(
   "stock-card.js",
@@ -380,8 +381,7 @@ test("illustrated header: the status pill right after the title, in the icon's c
   assert.match(html, /<a class="logo up"/);
   // No market sensor shown: the pill gives the day's move.
   assert.match(make(StockCard, base(), { entities: ["sensor.yahoofinance_aapl"], show_market_state: false })._render(), /<span class="chip up" title="\+1\.01%"/);
-  const { readFileSync } = await import("node:fs");
-  const src = readFileSync(new URL("../src/stock-card.js", import.meta.url), "utf8");
+  const src = source;
   // Its place (title row or under the subtitle) is measured (_fitPill), never by a fixed width; its dot at 200 px.
   assert.match(src, /\.titles\.pill-below \.trow \{ display: contents; \}/);
   assert.doesNotMatch(src, /st-titles/);
