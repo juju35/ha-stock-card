@@ -4,7 +4,7 @@
 
 export const BASE_STYLE = `
   :host { --st-up: var(--success-color, #43a047); --st-down: var(--error-color, #db4437); --st-warn: var(--warning-color, #ffa600);
-          --st-idle: var(--disabled-text-color, #9e9e9e); --st-accent: #6d5dfc; }
+          --st-idle: var(--secondary-text-color, #9e9e9e); --st-accent: #6d5dfc; }
   :host { display: block; }
   ha-card { overflow: hidden; container: st-card / inline-size; }
   /* A size container has no content width: this empty grid gives the card a natural width of 300 px with no minimum,
